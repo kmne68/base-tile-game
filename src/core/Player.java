@@ -14,14 +14,40 @@ import java.awt.image.BufferedImage;
  *
  * @author kmne6
  */
-public class Square extends GameObject {
+public class Player extends GameObject {
+  
+  private Controller controller;
+  
+  
+  public Player(Controller controller) {
+    super();
+    
+    this.controller = controller;
+    
+  }
   
   
   @Override
   public void update() {
     
-    position = new Position(position.getX() + 1, position.getY() );
-    // setPosition(new Position(getPosition().getX() + 1, getPosition().getY()));
+    int deltaX = 0;
+    int deltaY = 0;
+    
+    if(controller.isRequestingUp() ) {
+      deltaY--;
+    }    
+    if(controller.isRequestingDown() ) {
+      deltaY++;
+    }    
+    if(controller.isRequestingLeft() ) {
+      deltaX--;
+    }    
+    if(controller.isRequestingRight() ) {
+      deltaX++;
+    }    
+    
+    position = new Position(position.getX() + deltaX, position.getY() + deltaY);
+    
     
   }
   
@@ -33,7 +59,7 @@ public class Square extends GameObject {
     Graphics2D graphics = image.createGraphics();
     
     graphics.setColor(Color.blue);
-    graphics.fillRect(0, 0, size.getWidth(), size.getHeight());
+    graphics.fillRect(0, 0, getSize().getWidth(), getSize().getHeight());
     
     graphics.dispose();
     

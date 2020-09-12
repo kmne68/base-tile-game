@@ -13,8 +13,8 @@ import java.awt.Image;
  */
 public abstract class GameObject {
   
-  private Position position;
-  private Size size;
+  protected Position position;
+  protected Size size;
   
   
   public GameObject() {

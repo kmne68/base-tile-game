@@ -18,14 +18,18 @@ public class Game {
   
   private Display display;
   private List<GameObject> gameObjects;
+  private Input input;
   // private Rectangle rectangle;
   
   
   public Game(int width, int height) {
     
-    display = new Display(width, height);
+    input = new Input();
+    display = new Display(width, height, input);
     gameObjects = new ArrayList<GameObject>();
-    gameObjects.add(new Square());
+    gameObjects.add(new Player(new PlayerController(input)));
+    
+    //gameObjects.add(new Square());
     // rectangle = new Rectangle(0, 0, 50, 50);
   }
   
