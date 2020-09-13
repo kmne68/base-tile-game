@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package controller;
 
+import controller.Controller;
 import com.sun.glass.events.KeyEvent;
+import input.Input;
 
 /**
  *

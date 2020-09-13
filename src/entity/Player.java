@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package entity;
 
+import controller.Controller;
+import core.Position;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,15 +16,18 @@ import java.awt.image.BufferedImage;
  *
  * @author kmne6
  */
-public class Square extends GameObject {
+public class Player extends MovingEntity {
+  
+  public Player(Controller controller) {
+    super(controller);
+    
+  }
   
   
   @Override
-  public void update() {
+  public void update() {   
     
-    position = new Position(position.getX() + 1, position.getY() );
-    // setPosition(new Position(getPosition().getX() + 1, getPosition().getY()));
-    
+    super.update();
   }
   
   
@@ -33,7 +38,7 @@ public class Square extends GameObject {
     Graphics2D graphics = image.createGraphics();
     
     graphics.setColor(Color.blue);
-    graphics.fillRect(0, 0, size.getWidth(), size.getHeight());
+    graphics.fillRect(0, 0, getSize().getWidth(), getSize().getHeight());
     
     graphics.dispose();
     

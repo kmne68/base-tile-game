@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package display;
 
+import game.Game;
+import input.Input;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import javax.swing.*;
@@ -16,12 +18,15 @@ import javax.swing.*;
 public class Display extends JFrame {
   
   private Canvas canvas;
+  private Renderer renderer;
   
   public Display(int width, int height, Input input) {
     
     setTitle("2D Game");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setResizable(false);
+    
+    this.renderer = new Renderer();
     
     canvas = new Canvas();
     canvas.setPreferredSize(new Dimension(width, height));
@@ -45,12 +50,7 @@ public class Display extends JFrame {
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     
-    game.getGameObjects().forEach(gameObject -> graphics.drawImage(
-            gameObject.getSprite(),
-            gameObject.getPosition().getX(),
-            gameObject.getPosition().getY(),
-            null
-    ) );
+    renderer.render(game, graphics);
     
 //    Rectangle rectangle = game.getRectangle();
 //    graphics.setColor(Color.BLUE);

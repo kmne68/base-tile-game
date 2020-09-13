@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package entity;
 
+import core.Position;
+import core.Size;
 import java.awt.Image;
 
 /**
@@ -19,7 +21,7 @@ public abstract class GameObject {
   
   public GameObject() {
     
-    position = new Position(50, 50);
+    position = new Position(50.0, 50.0);
     size = new Size(50, 50);
   }
   

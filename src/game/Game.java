@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package game;
 
-import java.awt.*;
-import java.awt.Rectangle;
+import display.Display;
+import entity.GameObject;
+import entity.Player;
+import controller.PlayerController;
+import input.Input;
+//import java.awt.*;
+//import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
