@@ -6,11 +6,7 @@
 package entity;
 
 import controller.Controller;
-import core.Position;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
+import gfx.SpriteLibrary;
 
 /**
  *
@@ -18,8 +14,8 @@ import java.awt.image.BufferedImage;
  */
 public class Player extends MovingEntity {
   
-  public Player(Controller controller) {
-    super(controller);
+  public Player(Controller controller, SpriteLibrary spriteLibrary) {
+    super(controller, spriteLibrary);
     
   }
   
@@ -28,21 +24,6 @@ public class Player extends MovingEntity {
   public void update() {   
     
     super.update();
-  }
-  
-  
-  @Override
-  public Image getSprite() {
-    
-    BufferedImage image = new BufferedImage(size.getWidth(), size.getHeight(), BufferedImage.TYPE_INT_RGB);
-    Graphics2D graphics = image.createGraphics();
-    
-    graphics.setColor(Color.blue);
-    graphics.fillRect(0, 0, getSize().getWidth(), getSize().getHeight());
-    
-    graphics.dispose();
-    
-    return image;
   }
   
 }
