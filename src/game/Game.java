@@ -9,6 +9,7 @@ import display.Display;
 import entity.GameObject;
 import entity.Player;
 import controller.PlayerController;
+import gfx.SpriteLibrary;
 import input.Input;
 //import java.awt.*;
 //import java.awt.Rectangle;
@@ -24,6 +25,7 @@ public class Game {
   private Display display;
   private List<GameObject> gameObjects;
   private Input input;
+  private SpriteLibrary spriteLibrary;
   // private Rectangle rectangle;
   
   
@@ -33,6 +35,7 @@ public class Game {
     display = new Display(width, height, input);
     gameObjects = new ArrayList<GameObject>();
     gameObjects.add(new Player(new PlayerController(input)));
+    spriteLibrary = new SpriteLibrary();
     
     //gameObjects.add(new Square());
     // rectangle = new Rectangle(0, 0, 50, 50);
