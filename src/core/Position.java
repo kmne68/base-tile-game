@@ -52,7 +52,7 @@ public class Position {
     this.y = y;
   }
 
-  public void apply(Movement movement) {
+  public void apply(Motion movement) {
     
     Vector2D vector = movement.getVector();
     x += vector.getX();

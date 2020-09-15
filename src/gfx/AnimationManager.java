@@ -5,6 +5,7 @@
  */
 package gfx;
 
+import core.Direction;
 import game.Game;
 
 import java.awt.Image;
@@ -21,6 +22,7 @@ public class AnimationManager {
   private int updatesPerFrame;
   private int currentFrameTime;
   private int frameIndex;
+  private int directionIndex;
   
   
   public AnimationManager(SpriteSet spriteSet) {
@@ -29,6 +31,7 @@ public class AnimationManager {
     this.updatesPerFrame = 20;
     this.frameIndex = 0;
     this.currentFrameTime = 0;
+    this.directionIndex = 0;
     
     playAnimation("stand");
     
@@ -39,22 +42,23 @@ public class AnimationManager {
     
     return currentAnimationSheet.getSubimage(
             frameIndex * Game.SPRITE_SIZE,
-            0,
+            directionIndex * Game.SPRITE_SIZE,
             Game.SPRITE_SIZE,
             Game.SPRITE_SIZE
     );
   }
   
   
-  public void update() {
+  public void update(Direction direction) {
     
     currentFrameTime++;
+    directionIndex = direction.getAnimationRow();
     
     if(currentFrameTime >= updatesPerFrame) {
       currentFrameTime = 0;
       frameIndex++;
       
-      if(frameIndex >= currentAnimationSheet.getWidth() / Game.SPRITE_SIZE - 1 ) {
+      if(frameIndex >= currentAnimationSheet.getWidth() / Game.SPRITE_SIZE ) {
         frameIndex = 0;
       }
       

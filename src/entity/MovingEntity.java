@@ -6,7 +6,8 @@
 package entity;
 
 import controller.Controller;
-import core.Movement;
+import core.Direction;
+import core.Motion;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import java.awt.Image;
@@ -18,16 +19,18 @@ import java.awt.Image;
 public abstract class MovingEntity extends GameObject {
   
   private Controller controller;
-  private Movement movement;
+  private Motion motion;
   private AnimationManager animationManager;
+  private Direction direction;
   
   
   public MovingEntity(Controller controller, SpriteLibrary spriteLibrary) {
     super();
     
     this.controller = controller;
-    this.movement = new Movement(2);
-    animationManager = new AnimationManager(spriteLibrary.getUnit("dave"));
+    this.motion = new Motion(2);
+    this.direction = Direction.South;
+    this.animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
     
   }
   
@@ -35,9 +38,11 @@ public abstract class MovingEntity extends GameObject {
   @Override
   public void update() {
   
-    movement.update(controller);
-    position.apply(movement);
-    animationManager.update();
+    motion.update(controller);
+    position.apply(motion);
+    manageDirection();
+    selectAnimation();
+    animationManager.update(direction);
   }
   
   
@@ -47,6 +52,25 @@ public abstract class MovingEntity extends GameObject {
     
     return animationManager.getSprite();
 
+  }
+
+  private void manageDirection() {
+    
+    if(motion.isMoving() ) {
+        this.direction = Direction.fromMotion(motion);
+    }
+    
+  }
+
+  private void selectAnimation() {
+    
+    if( motion.isMoving() ) {
+      animationManager.playAnimation("walk");
+    }
+    else {
+      animationManager.playAnimation("stand");
+    }
+    
   }
   
 }
