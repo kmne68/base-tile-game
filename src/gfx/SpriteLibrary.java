@@ -5,6 +5,11 @@
  */
 package gfx;
 
+import game.Game;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
@@ -19,14 +24,39 @@ public class SpriteLibrary {
   private final static String PATH_TO_UNITS = "/resources/sprites/units";
   
   private Map<String, SpriteSet> units;
+  private Map<String, Image> tiles;
   
   public SpriteLibrary() {
     
     units = new HashMap<>();
+    tiles = new HashMap<>();
     loadSpritesFromDisk();
   }
 
   private void loadSpritesFromDisk() {
+    
+    loadUnits();
+    loadTiles();
+
+  }  
+  
+
+  private void loadTiles() {
+    
+    BufferedImage image = new BufferedImage(Game.SPRITE_SIZE, Game.SPRITE_SIZE, BufferedImage.TYPE_INT_RGB);
+    Graphics2D graphics = image.createGraphics();
+    
+    graphics.setColor(Color.red);
+    graphics.drawRect(0, 0, Game.SPRITE_SIZE, Game.SPRITE_SIZE);
+    
+    graphics.dispose();
+    tiles.put("default", image);
+    
+  }  
+  
+  
+  
+  private void loadUnits() {
     
     String[] folderNames = getFolderNames(PATH_TO_UNITS);
     
@@ -44,7 +74,9 @@ public class SpriteLibrary {
       units.put(folderName, spriteSet);
       System.out.println("folder name: " + folderName + ", sprite set: " + spriteSet);
     }
+    
   }
+  
 
   private String[] getFolderNames(String basePath) {
     
@@ -77,5 +109,13 @@ public class SpriteLibrary {
     return units.get(name);
     
   }
+  
+  
+  public Image getTile(String name) {
+    
+    return tiles.get(name);
+    
+  }
+
   
 }

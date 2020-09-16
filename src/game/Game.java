@@ -9,6 +9,8 @@ import display.Display;
 import entity.GameObject;
 import entity.Player;
 import controller.PlayerController;
+import game.state.GameState;
+import game.state.State;
 import gfx.SpriteLibrary;
 import input.Input;
 //import java.awt.*;
@@ -25,50 +27,28 @@ public class Game {
   public static int SPRITE_SIZE = 64;
   
   private Display display;
-  private List<GameObject> gameObjects;
   private Input input;
-  private SpriteLibrary spriteLibrary;
-  // private Rectangle rectangle;
-  
+  private State state;
   
   public Game(int width, int height) {
     
-    
     input = new Input();
     display = new Display(width, height, input);
-    gameObjects = new ArrayList<GameObject>();
-    spriteLibrary = new SpriteLibrary();
-    gameObjects.add(new Player(new PlayerController(input), spriteLibrary ) );
+    state = new GameState(input);
     
-    //gameObjects.add(new Square());
-    // rectangle = new Rectangle(0, 0, 50, 50);
   }
   
   
   public void update() {
     
-    gameObjects.forEach(gameOjbect -> gameOjbect.update());
-    // rectangle.setLocation((int) rectangle.getX() + 1, (int) rectangle.getY() );
-    
+    state.update();
   }
   
   
   public void render() {
     
-    display.render(this);
+    display.render(state);
   }
-  
-  
-  public List<GameObject> getGameObjects() {
-    
-    return gameObjects;
-  }
-  
-  
-//  public Rectangle getRectangle() {
-//    
-//    return rectangle;
-//  }
   
   
 }

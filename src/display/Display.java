@@ -6,6 +6,7 @@
 package display;
 
 import game.Game;
+import game.state.State;
 import input.Input;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -43,23 +44,14 @@ public class Display extends JFrame {
   }
   
   
-  public void render(Game game) {
+  public void render(State state) {
     BufferStrategy bufferStrategy = canvas.getBufferStrategy();
     Graphics graphics = bufferStrategy.getDrawGraphics();
     
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     
-    renderer.render(game, graphics);
-    
-//    Rectangle rectangle = game.getRectangle();
-//    graphics.setColor(Color.BLUE);
-//    graphics.fillRect(
-//            (int) rectangle.getX(), 
-//            (int) rectangle.getY(),
-//            (int) rectangle.getWidth(),
-//            (int) rectangle.getHeight()
-//    );
+    renderer.render(state, graphics);
     
     graphics.dispose();
     bufferStrategy.show();
