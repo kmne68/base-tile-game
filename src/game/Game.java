@@ -9,6 +9,7 @@ import display.Display;
 import entity.GameObject;
 import entity.Player;
 import controller.PlayerController;
+import core.Size;
 import game.state.GameState;
 import game.state.State;
 import gfx.SpriteLibrary;
@@ -34,7 +35,7 @@ public class Game {
     
     input = new Input();
     display = new Display(width, height, input);
-    state = new GameState(input);
+    state = new GameState(new Size(width, height), input);
     
   }
   
