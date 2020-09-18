@@ -20,102 +20,91 @@ import java.util.Map;
  * @author kmne6
  */
 public class SpriteLibrary {
-  
-  private final static String PATH_TO_UNITS = "/resources/sprites/units";
-  
+
   private Map<String, SpriteSet> units;
   private Map<String, Image> tiles;
-  
+
   public SpriteLibrary() {
-    
+
     units = new HashMap<>();
     tiles = new HashMap<>();
     loadSpritesFromDisk();
   }
 
   private void loadSpritesFromDisk() {
-    
-    loadUnits();
-    loadTiles();
 
-  }  
-  
+    loadUnits("/resources/sprites/units");
+    loadTiles("/resources/sprites/tiles");
 
-  private void loadTiles() {
-    
-    BufferedImage image = new BufferedImage(Game.SPRITE_SIZE, Game.SPRITE_SIZE, BufferedImage.TYPE_INT_RGB);
-    Graphics2D graphics = image.createGraphics();
-    
-    graphics.setColor(Color.red);
-    graphics.drawRect(0, 0, Game.SPRITE_SIZE, Game.SPRITE_SIZE);
-    
-    graphics.dispose();
-    tiles.put("default", image);
-    
-  }  
-  
-  
-  
-  private void loadUnits() {
-    
-    String[] folderNames = getFolderNames(PATH_TO_UNITS);
-    
-    for(String folderName: folderNames) {      
+  }
+
+  private void loadTiles(String path) {
+
+    String[] imagesInFolder = getImagesInFolder(path);
+
+    for (String fileName : imagesInFolder) {
+      tiles.put(
+              fileName.substring(0, fileName.length() - 4),
+              ImageUtils.loadImage(path + "/" + fileName));
+    }
+
+  }
+
+  private void loadUnits(String path) {
+
+    String[] folderNames = getFolderNames(path);
+
+    for (String folderName : folderNames) {
       SpriteSet spriteSet = new SpriteSet();
-      String pathToFolder = PATH_TO_UNITS + "/" + folderName;
-      String[] sheetsInFolder = getSheetsInFolder(pathToFolder);
-      
-      for(String sheetName : sheetsInFolder ) {        
+      String pathToFolder = path + "/" + folderName;
+      String[] sheetsInFolder = getImagesInFolder(pathToFolder);
+
+      for (String sheetName : sheetsInFolder) {
         spriteSet.addSheet(
                 sheetName.substring(0, sheetName.length() - 4),
-                ImageUtils.loadImage(pathToFolder + "/" + sheetName ) );
+                ImageUtils.loadImage(pathToFolder + "/" + sheetName));
       }
-      
+
       units.put(folderName, spriteSet);
       System.out.println("folder name: " + folderName + ", sprite set: " + spriteSet);
     }
-    
+
   }
-  
 
   private String[] getFolderNames(String basePath) {
-    
+
     URL resource = SpriteLibrary.class.getResource(basePath);
     File file = new File(resource.getFile());
-    
+
     // Pass in a method used to filter the contents to determine what to return in
     // the array of Strings. Return any that are a directory
-    
     System.out.println("base path: " + basePath);
-    return file.list( ( current, name) -> new File(current, name).isDirectory() );
+    return file.list((current, name) -> new File(current, name).isDirectory());
   }
 
-  private String[] getSheetsInFolder(String basePath) {
-    
+  private String[] getImagesInFolder(String basePath) {
+
     URL resource = SpriteLibrary.class.getResource(basePath);
     File file = new File(resource.getFile());
-    
+
     // Pass in a method used to filter the contents to determine what to return in
     // the array of Strings. Return any that are a directory    
-    
     System.out.println("base path: " + basePath);
-    return file.list( ( current, name) -> new File(current, name).isFile() );
-    
+    return file.list((current, name) -> new File(current, name).isFile());
+
   }
 
   public SpriteSet getUnit(String name) {
-    
+
     System.out.println("name: " + units.get(name));
     return units.get(name);
-    
-  }
-  
-  
-  public Image getTile(String name) {
-    
-    return tiles.get(name);
-    
+
   }
 
-  
+  public Image getTile(String name) {
+
+    return tiles.get(name);
+
+  }
+
 }
