@@ -6,8 +6,8 @@
 package controller;
 
 import controller.Controller;
-import com.sun.glass.events.KeyEvent;
 import input.Input;
+import java.awt.event.KeyEvent;
 
 /**
  *

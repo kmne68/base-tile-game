@@ -11,6 +11,7 @@ import entity.GameObject;
 import gfx.SpriteLibrary;
 import input.Input;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import map.GameMap;
 
@@ -40,6 +41,7 @@ public abstract class State {
   
   public void update() {    
     
+    sortObjectsByPosition();
     gameObjects.forEach(gameOjbect -> gameOjbect.update());
     camera.update(this);
   }
@@ -62,6 +64,19 @@ public abstract class State {
     
     return gameMap;
     
+  }
+
+  
+  /**
+   * Method to sort game objects by their Y position so that the player object
+   * is rendered on top of other objects.
+   */
+  private void sortObjectsByPosition() {
+    
+    gameObjects.sort(Comparator.comparing(gameObject -> gameObject.getPosition().getY()));
+    
+    // TODO: add attribute to objects to determine whether they are rendered
+    // before or after the player object
   }
   
 }
