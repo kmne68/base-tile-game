@@ -8,6 +8,7 @@ package game.state;
 import core.Size;
 import display.Camera;
 import entity.GameObject;
+import game.Time;
 import gfx.SpriteLibrary;
 import input.Input;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public abstract class State {
   protected SpriteLibrary spriteLibrary;
   protected Input input;
   protected Camera camera;
+  private Time time;
   
   
   public State(Size windowSize, Input input) {
@@ -35,6 +37,7 @@ public abstract class State {
     gameObjects = new ArrayList<GameObject>();
     spriteLibrary = new SpriteLibrary();
     camera = new Camera(windowSize);
+    time = new Time();
     
   }
   
@@ -42,7 +45,7 @@ public abstract class State {
   public void update() {    
     
     sortObjectsByPosition();
-    gameObjects.forEach(gameOjbect -> gameOjbect.update());
+    gameObjects.forEach(gameOjbect -> gameOjbect.update(this));
     camera.update(this);
   }
   
@@ -77,6 +80,10 @@ public abstract class State {
     
     // TODO: add attribute to objects to determine whether they are rendered
     // before or after the player object
+  }
+
+  public Time getTime() {
+    return time;
   }
   
 }

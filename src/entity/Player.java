@@ -19,11 +19,4 @@ public class Player extends MovingEntity {
     
   }
   
-  
-  @Override
-  public void update() {   
-    
-    super.update();
-  }
-  
 }

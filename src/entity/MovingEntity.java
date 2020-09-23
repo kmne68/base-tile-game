@@ -8,6 +8,7 @@ package entity;
 import controller.Controller;
 import core.Direction;
 import core.Motion;
+import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import java.awt.Image;
@@ -36,7 +37,7 @@ public abstract class MovingEntity extends GameObject {
   
   
   @Override
-  public void update() {
+  public void update(State state) {
   
     motion.update(controller);
     position.apply(motion);

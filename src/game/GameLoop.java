@@ -13,10 +13,12 @@ import game.Game;
  */
 public class GameLoop implements Runnable {
 
+  public static final int UPDATES_PER_SECOND = 60;
+
   private Game game;
 
   private boolean running;
-  private final double updateRate = 1.0d / 60.0d; // 60 updates per second
+  private final double updateRate = 1.0d / UPDATES_PER_SECOND; // 60 updates per second
 
   // diagnostic stats
   private long nextStatTime;
