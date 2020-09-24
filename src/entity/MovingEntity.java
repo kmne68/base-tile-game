@@ -19,7 +19,7 @@ import java.awt.Image;
  */
 public abstract class MovingEntity extends GameObject {
   
-  protected Controller controller;
+  private Controller controller;
   protected Motion motion;
   protected AnimationManager animationManager;
   protected Direction direction;
@@ -72,6 +72,10 @@ public abstract class MovingEntity extends GameObject {
       animationManager.playAnimation("stand");
     }
     
+  }
+
+  public Controller getController() {
+    return controller;
   }
   
 }
