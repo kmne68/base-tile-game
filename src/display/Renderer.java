@@ -21,10 +21,10 @@ public class Renderer {
     renderMap(state, graphics);
     Camera camera = state.getCamera();
     
-    state.getGameObjects().forEach(gameObject -> graphics.drawImage(
-            gameObject.getSprite(),
-            
-            // the following values are corrected for the size of the game object's height and width
+    state.getGameObjects().stream()
+            .filter(gameObject -> camera.isInView(gameObject))
+            .forEach(gameObject -> graphics.drawImage(
+            gameObject.getSprite(),            
             gameObject.getPosition().intX() - camera.getPosition().intX() - gameObject.getSize().getWidth() / 2,
             gameObject.getPosition().intY() - camera.getPosition().intY() - gameObject.getSize().getHeight() / 2,
             null

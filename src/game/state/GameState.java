@@ -36,10 +36,23 @@ public class GameState extends State {
     Player player = new Player(new PlayerController(input), spriteLibrary );
     NPC npc = new NPC(new NPCController(), spriteLibrary);
     npc.setPosition(new Position(3 * Game.SPRITE_SIZE, 2 * Game.SPRITE_SIZE) );
-    gameObjects.addAll(List.of(player, npc)); // addAll() is a way to generalize the addition
+    gameObjects.add(player); // addAll() is a way to generalize the addition
     
     // switch between camera focus on player and NPC
-    camera.focusOn(npc);
-    // camera.focusOn(player);
+    // camera.focusOn(npc);
+    camera.focusOn(player);
+    
+    
+    initializeNPCs(100);
+  }
+
+  private void initializeNPCs(int numberOfNPCs) {
+    
+    for(int i = 0; i < numberOfNPCs; i++) {
+      NPC npc = new NPC(new NPCController(), spriteLibrary);
+      npc.setPosition(new Position(3 * Game.SPRITE_SIZE, 2 * Game.SPRITE_SIZE) );
+      gameObjects.add(npc);
+    }
+    
   }
 }
