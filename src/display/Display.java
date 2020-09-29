@@ -36,7 +36,7 @@ public class Display extends JFrame {
     addKeyListener(input);
     pack();
     
-    canvas.createBufferStrategy(3); // the argument is the number of buffers
+    canvas.createBufferStrategy(2); // the argument is the number of buffers
     
     setLocationRelativeTo(null); // will result in a display centered onscreen
     setVisible(true);

@@ -8,6 +8,7 @@ package display;
 import core.Position;
 import core.Size;
 import entity.GameObject;
+import game.Game;
 import game.state.State;
 import java.awt.Rectangle;
 import java.util.Optional;
@@ -17,6 +18,8 @@ import java.util.Optional;
  * @author kmne6
  */
 public class Camera {
+  
+  private static final int SAFETY_SPACE = 2 * Game.SPRITE_SIZE;
   
   private Position position;
   private Size windowSize;
@@ -83,13 +86,23 @@ public class Camera {
     return viewBounds.intersects(
             gameObject.getPosition().intX(),
             gameObject.getPosition().intY(),
-            gameObject.getSize().getWidth(),
-            gameObject.getSize().getHeight());
+            gameObject.getSize().getWidth() + SAFETY_SPACE,
+            gameObject.getSize().getHeight() + SAFETY_SPACE
+    );
   }
 
   private void calculateViewBounds() {
     
-    viewBounds = new Rectangle(position.intX(), position.intY(), windowSize.getWidth(), windowSize.getHeight() );
+    viewBounds = new Rectangle(
+            position.intX(), 
+            position.intY(), 
+            windowSize.getWidth(), 
+            windowSize.getHeight() );
+  }
+
+  public Size getWindowSize() {
+    
+    return windowSize;    
   }
   
   
