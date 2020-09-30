@@ -57,5 +57,9 @@ public class Motion {
     return vector.length() > 0;
     
   }
+
+  public void multiply(double multiplier) {
+    vector.multiply(multiplier);
+  }
     
 }
