@@ -8,6 +8,7 @@ package entity;
 import controller.Controller;
 import core.Direction;
 import core.Motion;
+import entity.action.Action;
 import entity.effect.Effect;
 import game.state.State;
 import gfx.AnimationManager;
@@ -15,6 +16,7 @@ import gfx.SpriteLibrary;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -27,6 +29,7 @@ public abstract class MovingEntity extends GameObject {
   protected AnimationManager animationManager;
   protected Direction direction;
   protected List<Effect> effects;
+  protected Optional<Action> action;
   
   
   public MovingEntity(Controller controller, SpriteLibrary spriteLibrary) {
@@ -37,6 +40,7 @@ public abstract class MovingEntity extends GameObject {
     this.direction = Direction.South;
     this.animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
     effects = new ArrayList<>();
+    action = Optional.empty();
   }
   
   
@@ -50,7 +54,8 @@ public abstract class MovingEntity extends GameObject {
   @Override
   public void update(State state) {
   
-    motion.update(controller);
+    handleAction(state);
+    handleMotion();
     animationManager.update(direction);
     effects.forEach(effect -> effect.update(state, this));
     manageDirection();
@@ -94,6 +99,23 @@ public abstract class MovingEntity extends GameObject {
 
   public void multiplySpeed(double multiplier) {
     motion.multiply(multiplier);
+  }
+
+  private void handleAction(State state) {
+    
+    if(action.isPresent()) {
+      action.get().update(state, this);
+    }
+      
+  }
+
+  private void handleMotion() {
+    
+    if(action.isPresent()) {
+      motion.update(controller);
+    } else {
+      motion.stop();
+    }
   }
   
 }
