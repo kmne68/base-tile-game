@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 public class AnimationManager {
   
   private SpriteSet spriteSet;
+  private String currentAnimationName;
   private BufferedImage currentAnimationSheet;
   private int updatesPerFrame;
   private int currentFrameTime;
@@ -32,6 +33,7 @@ public class AnimationManager {
     this.frameIndex = 0;
     this.currentFrameTime = 0;
     this.directionIndex = 0;
+    currentAnimationName = "";
     
     playAnimation("stand");
     
@@ -68,8 +70,12 @@ public class AnimationManager {
   
   public void playAnimation(String name) {
     
-    // we cast to a Buffered Image to take advantage of that class' getSubmimage method
-    this.currentAnimationSheet = (BufferedImage) spriteSet.get(name);
+    if(!name.equals(currentAnimationName)) {
+      // we cast to a Buffered Image to take advantage of that class' getSubmimage method
+      this.currentAnimationSheet = (BufferedImage) spriteSet.get(name);
+      currentAnimationName = name;
+      frameIndex = 0;
+    }
   }
   
 }

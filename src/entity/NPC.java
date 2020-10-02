@@ -7,9 +7,13 @@ package entity;
 
 import ai.AIManager;
 import controller.Controller;
+import entity.action.Action;
+import entity.action.Cough;
+import entity.effect.Sick;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
+import java.util.Optional;
 
 /**
  *
@@ -32,7 +36,6 @@ public class NPC extends MovingEntity {
     super.update(state);
     
     aiManager.update(state, this);
-  }
-  
+  }  
   
 }

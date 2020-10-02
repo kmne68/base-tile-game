@@ -48,6 +48,10 @@ public abstract class MovingEntity extends GameObject {
     List.copyOf(effects).stream()
             .filter(Effect::shouldDelete)
             .forEach(effects::remove);
+    
+    if(action.isPresent() && action.get().isDone()) {
+      action = Optional.empty();
+    }
   }
   
   
@@ -84,7 +88,9 @@ public abstract class MovingEntity extends GameObject {
 
   private void selectAnimation() {
     
-    if( motion.isMoving() ) {
+    if(action.isPresent()) {
+      animationManager.playAnimation(action.get().getAnimationName());
+    } else if( motion.isMoving() ) {
       animationManager.playAnimation("walk");
     }
     else {
@@ -111,11 +117,23 @@ public abstract class MovingEntity extends GameObject {
 
   private void handleMotion() {
     
-    if(action.isPresent()) {
+    if(!action.isPresent()) {
       motion.update(controller);
     } else {
       motion.stop();
     }
+  }
+  
+  
+  public void addEffect(Effect effect) {
+    
+    effects.add(effect);
+  }
+  
+  
+  public void perform(Action action) {
+    
+    this.action = Optional.of(action);
   }
   
 }

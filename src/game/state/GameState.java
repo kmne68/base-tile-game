@@ -11,6 +11,8 @@ import core.Position;
 import core.Size;
 import entity.NPC;
 import entity.Player;
+import entity.action.Cough;
+import entity.effect.Sick;
 import game.Game;
 import input.Input;
 import java.util.List;
@@ -50,7 +52,13 @@ public class GameState extends State {
     
     for(int i = 0; i < numberOfNPCs; i++) {
       NPC npc = new NPC(new NPCController(), spriteLibrary);
-      npc.setPosition(new Position(3 * Game.SPRITE_SIZE, 2 * Game.SPRITE_SIZE) );
+      
+      // Place NPC(s) at fixed position
+      // npc.setPosition(new Position(3 * Game.SPRITE_SIZE, 2 * Game.SPRITE_SIZE) );
+      
+      // Place NPC(s) at random positions
+      npc.setPosition(gameMap.getRandomPosition());
+      npc.addEffect(new Sick());
       gameObjects.add(npc);
     }
     
