@@ -20,5 +20,14 @@ public class Player extends MovingEntity {
     
     effects.add(new Caffeinated() );
   }
+
+  @Override
+  protected void handleCollision(GameObject other) {
+    
+    if(other instanceof NPC) {
+      NPC npc = (NPC) other;
+      npc.clearEffects();   // this clears whatever effect is on the NPC when they collide with out player
+    }
+  }
   
 }
