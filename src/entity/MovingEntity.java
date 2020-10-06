@@ -9,6 +9,7 @@ import controller.Controller;
 import core.CollisionBox;
 import core.Direction;
 import core.Motion;
+import core.Size;
 import entity.action.Action;
 import entity.effect.Effect;
 import game.state.State;
@@ -33,6 +34,8 @@ public abstract class MovingEntity extends GameObject {
   protected List<Effect> effects;
   protected Optional<Action> action;
   
+  protected Size collisionBoxSize;
+  
   
   public MovingEntity(Controller controller, SpriteLibrary spriteLibrary) {
     super();
@@ -43,6 +46,7 @@ public abstract class MovingEntity extends GameObject {
     this.animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
     effects = new ArrayList<>();
     action = Optional.empty();
+    this.collisionBoxSize = new Size(16, 28);
   }
   
   
@@ -78,16 +82,16 @@ public abstract class MovingEntity extends GameObject {
   public Image getSprite() {
     
     return animationManager.getSprite();
-
   }
 
+  
   private void manageDirection() {
     
     if(motion.isMoving() ) {
         this.direction = Direction.fromMotion(motion);
-    }
-    
+    }    
   }
+  
 
   private void selectAnimation() {
     
@@ -98,25 +102,27 @@ public abstract class MovingEntity extends GameObject {
     }
     else {
       animationManager.playAnimation("stand");
-    }
-    
+    }    
   }
+  
 
   public Controller getController() {
     return controller;
   }
 
+  
   public void multiplySpeed(double multiplier) {
     motion.multiply(multiplier);
   }
 
+  
   private void handleAction(State state) {
     
     if(action.isPresent()) {
       action.get().update(state, this);
-    }
-      
+    }      
   }
+  
 
   private void handleMotion() {
     
@@ -154,8 +160,8 @@ public abstract class MovingEntity extends GameObject {
             new Rectangle(
                     position.intX(),
                     position.intY(),
-                    size.getWidth(),
-                    size.getHeight()
+                    collisionBoxSize.getWidth(),
+                    collisionBoxSize.getHeight()
             )
     );    
   }

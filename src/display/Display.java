@@ -5,7 +5,6 @@
  */
 package display;
 
-import game.Game;
 import game.state.State;
 import input.Input;
 import java.awt.*;
@@ -20,6 +19,8 @@ public class Display extends JFrame {
   
   private Canvas canvas;
   private Renderer renderer;
+  private DebugRenderer debugRenderer;
+  
   
   public Display(int width, int height, Input input) {
     
@@ -28,6 +29,7 @@ public class Display extends JFrame {
     setResizable(false);
     
     this.renderer = new Renderer();
+    this.debugRenderer = new DebugRenderer();
     
     canvas = new Canvas();
     canvas.setPreferredSize(new Dimension(width, height));
@@ -44,7 +46,7 @@ public class Display extends JFrame {
   }
   
   
-  public void render(State state) {
+  public void render(State state, boolean debugMode) {
     BufferStrategy bufferStrategy = canvas.getBufferStrategy();
     Graphics graphics = bufferStrategy.getDrawGraphics();
     
@@ -52,6 +54,10 @@ public class Display extends JFrame {
     graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     
     renderer.render(state, graphics);
+    
+    if(debugMode) {
+      debugRenderer.render(state, graphics);
+    }
     
     graphics.dispose();
     bufferStrategy.show();

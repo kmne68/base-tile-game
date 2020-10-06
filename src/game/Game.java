@@ -10,6 +10,7 @@ import entity.GameObject;
 import entity.Player;
 import controller.PlayerController;
 import core.Size;
+import game.settings.GameSettings;
 import game.state.GameState;
 import game.state.State;
 import gfx.SpriteLibrary;
@@ -30,12 +31,14 @@ public class Game {
   private Display display;
   private Input input;
   private State state;
+  private GameSettings settings;
   
   public Game(int width, int height) {
     
     input = new Input();
     display = new Display(width, height, input);
     state = new GameState(new Size(width, height), input);
+    settings = new GameSettings(true);
     
   }
   
@@ -48,7 +51,7 @@ public class Game {
   
   public void render() {
     
-    display.render(state);
+    display.render(state, settings.isDebugMode());
   }
   
   
