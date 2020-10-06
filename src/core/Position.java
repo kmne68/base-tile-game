@@ -12,7 +12,7 @@ package core;
 public class Position {
   
   public static int PROXIMITY_RANGE = 5;
-  
+ 
   // units are pixels
   private double x;
   private double y;
@@ -26,6 +26,13 @@ public class Position {
   public Position(int x, int y) {
     this.x = x;
     this.y = y;
+  }
+  
+  
+  public static Position copyOf(Position position) {
+    
+    return new Position(position.getX(), position.getY());
+    
   }
   
   
@@ -71,6 +78,15 @@ public class Position {
     
     return Math.abs(x - position.getX()) < Position.PROXIMITY_RANGE &&
             Math.abs(y - position.getY()) < Position.PROXIMITY_RANGE;
+  }
+
+  public void applyX(Motion motion) {
+    x += motion.getVector().getX();
+  }
+  
+  
+  public void applyY(Motion motion) {
+    y += motion.getVector().getY();
   }
 
   

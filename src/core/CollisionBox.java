@@ -12,6 +12,7 @@ import java.awt.Rectangle;
  * @author kmne6
  */
 public class CollisionBox {
+
   
   private Rectangle bounds;
 
@@ -30,6 +31,18 @@ public class CollisionBox {
     return bounds;
   }
   
+  
+  public static CollisionBox of(Position position, Size size) {
+    return new CollisionBox(
+            new Rectangle(
+              position.intX(),
+              position.intY(),
+              size.getWidth(),
+              size.getHeight()                    
+            )
+    );
+    
+  }
   
   
 }
