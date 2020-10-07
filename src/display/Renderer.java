@@ -5,7 +5,6 @@ import game.Game;
 import game.state.State;
 import java.awt.Graphics;
 import map.GameMap;
-import map.Tile;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,6 +20,12 @@ public class Renderer {
   public void render(State state, Graphics graphics) {
 
     renderMap(state, graphics);
+    renderGameObjects(state, graphics);
+    renderUI(state, graphics);
+  }
+  
+  
+  private void renderGameObjects(State state, Graphics graphics) {
     Camera camera = state.getCamera();
     
     state.getGameObjects().stream()
@@ -31,7 +36,6 @@ public class Renderer {
             gameObject.getPosition().intY() - camera.getPosition().intY() - gameObject.getSize().getHeight() / 2,
             null
     ));
-
   }
   
 
@@ -54,6 +58,15 @@ public class Renderer {
       }
     }
     
+  }
+
+  private void renderUI(State state, Graphics graphics) {
+    state.getUiContainers().forEach(uiContainer -> graphics.drawImage(
+            uiContainer.getSprite(),
+            uiContainer.getPosition().intX(),
+            uiContainer.getPosition().intY(),
+            null
+    ));
   }
 
 }

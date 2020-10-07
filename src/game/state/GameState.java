@@ -15,8 +15,9 @@ import entity.action.Cough;
 import entity.effect.Sick;
 import game.Game;
 import input.Input;
-import java.util.List;
 import map.GameMap;
+import ui.UIContainer;
+import ui.Spacing;
 
 /**
  *
@@ -30,6 +31,7 @@ public class GameState extends State {
 
     gameMap = new GameMap(new Size(20, 20), spriteLibrary);
     initializeCharacters();
+    initializeUI();
   }
   
   
@@ -62,5 +64,13 @@ public class GameState extends State {
       gameObjects.add(npc);
     }
     
+  }
+
+  private void initializeUI() {
+    
+    UIContainer container = new UIContainer();
+    container.setPadding(new Spacing(50));
+    container.setMargin(new Spacing(10));
+    uiContainers.add(container);
   }
 }
