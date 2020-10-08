@@ -13,32 +13,46 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author kmne6
  */
-public class UIContainer extends UIComponent {
+public abstract class UIContainer extends UIComponent {
   
-  private Color backgroundColor;
+  protected Color backgroundColor;
+  
+  protected List<UIComponent> children;
 
   
   public UIContainer() {
     super();
     backgroundColor = Color.RED;
-    
+    margin = new Spacing(5);
+    children = new ArrayList<>();
     calculateSize();
     calculatePosition();
   }
   
   
+  protected abstract Size calculateContentSize();
+  protected abstract void calculateContentPosition();
+  
+  
   private void calculateSize() {
-    size =  new Size(padding.getHorizontal(), padding.getVertical());
+    Size calculatedContentSize = calculateContentSize();
+    size =  new Size(
+            padding.getHorizontal() + calculatedContentSize.getWidth(),
+            padding.getVertical() + calculatedContentSize.getHeight()
+    );
   }
   
   
   private void calculatePosition() {
     position = new Position(margin.getLeft(), margin.getTop());
+    calculateContentPosition();
   }
   
 
@@ -50,16 +64,34 @@ public class UIContainer extends UIComponent {
     graphics.setColor(backgroundColor);
     graphics.fillRect(0, 0, size.getWidth(), size.getHeight());
     
+    for(UIComponent uiComponent : children) {
+      graphics.drawImage(
+              uiComponent.getSprite(),
+              uiComponent.getPosition().intX(),
+              uiComponent.getPosition().intY(),
+              null
+      );
+    }
+    
     graphics.dispose();
     return image;
   }
 
   @Override
   public void update(State state) {
+    
+    children.forEach(component -> component.update(state));
     calculateSize();
     calculatePosition();    
   }
   
   
-  
+  public void addUIComponent(UIComponent uiComponent) {
+    children.add(uiComponent);    
+  }
+
+  public void setBackgroundColor(Color color) {
+    
+    backgroundColor = color;
+  }
 }
