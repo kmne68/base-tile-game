@@ -20,6 +20,7 @@ import map.GameMap;
 import ui.HorizontalContainer;
 import ui.UIContainer;
 import ui.Spacing;
+import ui.UIText;
 import ui.VerticalContainer;
 
 /**
@@ -72,11 +73,12 @@ public class GameState extends State {
   private void initializeUI() {
     
     UIContainer container = new VerticalContainer();
-    container.setPadding(new Spacing(20));
-    container.setBackgroundColor(Color.GRAY);
-    container.addUIComponent(new HorizontalContainer());
-    container.addUIComponent(new HorizontalContainer());
-    container.addUIComponent(new HorizontalContainer());
+    container.setPadding(new Spacing(5));
+//    container.setBackgroundColor(Color.LIGHT_GRAY);
+    container.setBackgroundColor(new Color(0, 0, 0, 0 ) );
+//    container.addUIComponent(new HorizontalContainer());
+//    container.addUIComponent(new HorizontalContainer());
+    container.addUIComponent(new UIText("Hello UI world!"));
     uiContainers.add(container);
   }
 }
