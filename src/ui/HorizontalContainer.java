@@ -13,6 +13,10 @@ import core.Size;
  * @author kmne6
  */
 public class HorizontalContainer extends UIContainer {
+  
+  public HorizontalContainer(Size windowSize) {
+    super(windowSize);
+  }
 
   @Override
   protected Size calculateContentSize() {

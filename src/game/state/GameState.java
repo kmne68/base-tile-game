@@ -17,6 +17,7 @@ import game.Game;
 import input.Input;
 import java.awt.Color;
 import map.GameMap;
+import ui.Alignment;
 import ui.HorizontalContainer;
 import ui.UIContainer;
 import ui.Spacing;
@@ -35,7 +36,7 @@ public class GameState extends State {
 
     gameMap = new GameMap(new Size(20, 20), spriteLibrary);
     initializeCharacters();
-    initializeUI();
+    initializeUI(windowSize);
   }
   
   
@@ -70,15 +71,22 @@ public class GameState extends State {
     
   }
 
-  private void initializeUI() {
+  private void initializeUI(Size windowSize) {
     
-    UIContainer container = new VerticalContainer();
+    UIContainer container = new VerticalContainer(windowSize);
     container.setPadding(new Spacing(5));
-//    container.setBackgroundColor(Color.LIGHT_GRAY);
     container.setBackgroundColor(new Color(0, 0, 0, 0 ) );
-//    container.addUIComponent(new HorizontalContainer());
-//    container.addUIComponent(new HorizontalContainer());
-    container.addUIComponent(new UIText("Hello UI world!"));
+    container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
+    
+    UIContainer containerEnd = new VerticalContainer(windowSize);
+    containerEnd.setPadding(new Spacing(5));
+    containerEnd.setBackgroundColor(new Color(0, 0, 0, 0 ) );
+    containerEnd.setAlignment(new Alignment(Alignment.Position.END, Alignment.Position.END));
+    
+    
+    container.addUIComponent(new UIText("Welcome!"));
+    containerEnd.addUIComponent(new UIText("Farewell!"));
     uiContainers.add(container);
+    uiContainers.add(containerEnd);
   }
 }
