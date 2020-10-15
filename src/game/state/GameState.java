@@ -14,6 +14,7 @@ import entity.Player;
 import entity.action.Cough;
 import entity.effect.Sick;
 import game.Game;
+import game.ui.UIGameTime;
 import input.Input;
 import java.awt.Color;
 import map.GameMap;
@@ -73,20 +74,25 @@ public class GameState extends State {
 
   private void initializeUI(Size windowSize) {
     
-    UIContainer container = new VerticalContainer(windowSize);
-    container.setPadding(new Spacing(5));
-    container.setBackgroundColor(new Color(0, 0, 0, 0 ) );
-    container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
-    
-    UIContainer containerEnd = new VerticalContainer(windowSize);
-    containerEnd.setPadding(new Spacing(5));
-    containerEnd.setBackgroundColor(new Color(0, 0, 0, 0 ) );
-    containerEnd.setAlignment(new Alignment(Alignment.Position.END, Alignment.Position.END));
-    
-    
-    container.addUIComponent(new UIText("Welcome!"));
-    containerEnd.addUIComponent(new UIText("Farewell!"));
-    uiContainers.add(container);
-    uiContainers.add(containerEnd);
+    /**
+     * The following commented code is left as an example
+     */
+//    UIContainer container = new VerticalContainer(windowSize);
+//    container.setPadding(new Spacing(5));
+//    container.setBackgroundColor(new Color(0, 0, 0, 0 ) );
+//    container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
+//    
+//    UIContainer containerEnd = new VerticalContainer(windowSize);
+//    containerEnd.setPadding(new Spacing(5));
+//    containerEnd.setBackgroundColor(new Color(0, 0, 0, 0 ) );
+//    containerEnd.setAlignment(new Alignment(Alignment.Position.END, Alignment.Position.END));
+//    
+//    
+//    container.addUIComponent(new UIText("Welcome!"));
+//    containerEnd.addUIComponent(new UIText("Farewell!"));
+//    uiContainers.add(container);
+//    uiContainers.add(containerEnd);
+
+    uiContainers.add(new UIGameTime(windowSize));
   }
 }

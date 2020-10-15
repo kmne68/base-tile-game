@@ -23,7 +23,7 @@ import java.util.List;
 public abstract class UIContainer extends UIComponent {
   
   protected Color backgroundColor;
-  private Alignment alignment;
+  protected Alignment alignment;
   protected Size windowSize;
   protected List<UIComponent> children;
 
@@ -31,8 +31,8 @@ public abstract class UIContainer extends UIComponent {
   public UIContainer(Size windowSize) {
     super();
     this.windowSize = windowSize;
-    alignment = new Alignment(Alignment.Position.START, Alignment.Position.START);
-    backgroundColor = Color.RED;
+    alignment = new Alignment(Alignment.Position.CENTER, Alignment.Position.START);
+    backgroundColor = new Color(0, 0, 0, 0);
     margin = new Spacing(5);
     padding = new Spacing(5);
     children = new ArrayList<>();
