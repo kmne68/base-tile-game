@@ -13,6 +13,7 @@ import core.Position;
 import core.Size;
 import entity.action.Action;
 import entity.effect.Effect;
+import entity.effect.Sick;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
@@ -21,6 +22,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  *
@@ -193,6 +195,12 @@ public abstract class MovingEntity extends GameObject {
     positionWithYApplied.applyY(motion);
     
     return CollisionBox.of(positionWithYApplied, collisionBoxSize).collidesWith(otherBox);
+  }
+
+  public boolean isAffectedBy(Class<?> aClass) {
+    
+    return effects.stream()
+            .anyMatch(effect -> aClass.isInstance(effect));
   }
   
 }

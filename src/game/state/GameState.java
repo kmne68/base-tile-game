@@ -15,6 +15,7 @@ import entity.action.Cough;
 import entity.effect.Sick;
 import game.Game;
 import game.ui.UIGameTime;
+import game.ui.UISicknessStatistics;
 import input.Input;
 import java.awt.Color;
 import map.GameMap;
@@ -94,5 +95,6 @@ public class GameState extends State {
 //    uiContainers.add(containerEnd);
 
     uiContainers.add(new UIGameTime(windowSize));
+    uiContainers.add(new UISicknessStatistics(windowSize));
   }
 }
