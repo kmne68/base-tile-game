@@ -97,6 +97,7 @@ public abstract class State {
     
     return gameMap.getRandomPosition();
   }
+  
 
   public List<GameObject> getCollidingGameObjects(GameObject gameObject) {
     
@@ -104,11 +105,18 @@ public abstract class State {
             .filter(other -> other.collidesWith(gameObject))
             .collect(Collectors.toList());
   }
+  
 
   public List<UIContainer> getUiContainers() {
     return uiContainers;
   }
   
   
-  
+  public <T extends GameObject> List<T> getGameObjectsOfClass(Class<T> aClass) {
+    
+    return gameObjects.stream()
+            .filter(aClass::isInstance)
+            .map(gameObject -> (T) gameObject)
+            .collect(Collectors.toList());
+  }
 }

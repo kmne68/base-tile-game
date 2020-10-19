@@ -5,7 +5,12 @@
  */
 package entity.action;
 
+import core.CollisionBox;
+import core.Position;
+import core.Size;
 import entity.MovingEntity;
+import entity.effect.Sick;
+import game.Game;
 import game.GameLoop;
 import game.state.State;
 
@@ -16,21 +21,45 @@ import game.state.State;
 public class Cough extends Action {
   
   private int lifespanInSeconds;
+  private Size spreadAreaSize;
+  private double risk;
+  
   
   public Cough() {
     lifespanInSeconds = GameLoop.UPDATES_PER_SECOND;
+    spreadAreaSize = new Size(2 * Game.SPRITE_SIZE, Game.SPRITE_SIZE);
+    risk = 0.1;
   }
+  
 
   @Override
   public void update(State state, MovingEntity entity) {
-    lifespanInSeconds--;
+    if(--lifespanInSeconds <= 0) {
+      Position spreadAreaPosition = new Position(
+             entity.getPosition().getX() - spreadAreaSize.getWidth() / 2,
+             entity.getPosition().getY() - spreadAreaSize.getHeight() / 2
+      );
+     
+      CollisionBox spreadArea = CollisionBox.of(spreadAreaPosition, spreadAreaSize);
+      
+      state.getGameObjectsOfClass(MovingEntity.class).stream()
+              .filter(movingEntity -> movingEntity.getCollisionBox().collidesWith(spreadArea))
+              .forEach(movingEntity -> {
+                
+                if(Math.random() < risk) {
+                  movingEntity.addEffect(new Sick());
+                }
+              });
+    }
   }
 
+  
   @Override
   public boolean isDone() {
     return lifespanInSeconds <= 0;
   }
 
+  
   @Override
   public String getAnimationName() {
     return "cough";

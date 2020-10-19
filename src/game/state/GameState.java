@@ -45,8 +45,6 @@ public class GameState extends State {
   private void initializeCharacters() {
     
     Player player = new Player(new PlayerController(input), spriteLibrary );
-    NPC npc = new NPC(new NPCController(), spriteLibrary);
-    npc.setPosition(new Position(3 * Game.SPRITE_SIZE, 2 * Game.SPRITE_SIZE) );
     gameObjects.add(player); // addAll() is a way to generalize the addition
     
     // switch between camera focus on player and NPC
@@ -54,7 +52,8 @@ public class GameState extends State {
     camera.focusOn(player);
     
     
-    initializeNPCs(100);
+    initializeNPCs(200);
+    makeNumberOfNPCsSick(10);
   }
 
   private void initializeNPCs(int numberOfNPCs) {
@@ -67,7 +66,7 @@ public class GameState extends State {
       
       // Place NPC(s) at random positions
       npc.setPosition(gameMap.getRandomPosition());
-      npc.addEffect(new Sick());
+      // npc.addEffect(new Sick());   // Make all NPCs sick
       gameObjects.add(npc);
     }
     
@@ -96,5 +95,12 @@ public class GameState extends State {
 
     uiContainers.add(new UIGameTime(windowSize));
     uiContainers.add(new UISicknessStatistics(windowSize));
+  }
+
+  private void makeNumberOfNPCsSick(int initialSickNPCs) {
+    
+    getGameObjectsOfClass(NPC.class).stream()
+            .limit(initialSickNPCs)
+            .forEach(npc -> npc.addEffect(new Sick()));
   }
 }
