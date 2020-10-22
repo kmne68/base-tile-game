@@ -5,7 +5,7 @@
  */
 package core;
 
-import controller.Controller;
+import controller.EntityController;
 
 /**
  *
@@ -23,7 +23,7 @@ public class Motion {
   }
   
   
-  public void update(Controller controller) {    
+  public void update(EntityController controller) {    
     
     int deltaX = 0;
     int deltaY = 0;

@@ -43,7 +43,7 @@ public class GameLoop implements Runnable {
     while (running) {
       currentTime = System.currentTimeMillis();
       double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
-      accumulator += lastRenderTimeInSeconds;
+      accumulator += lastRenderTimeInSeconds * game.getSettings().getGameSpeedMultiplier();
       lastUpdate = currentTime;
 
       // check whether there is anything new to render

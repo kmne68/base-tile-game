@@ -14,22 +14,34 @@ import java.awt.event.KeyListener;
  */
 public class Input implements KeyListener {
   
+  private boolean[] currentlyPressed;
   private boolean[] pressed;
   
   
   public Input() {
-    
     pressed = new boolean[255];
+    currentlyPressed = new boolean[255];
+  }
+  
+  
+  public boolean isPressed(int keyCode) {
+    
+    if( !pressed[keyCode] && currentlyPressed[keyCode] ) {
+      pressed[keyCode] = true;
+      return true;
+    }
+    
+    return false;
   }
 
   
-  public boolean isPressed(int keyCode) {
+  public boolean isCurrentlyPressed(int keyCode) {
     
   //  for(boolean key : pressed) {
   //    System.out.println("key in pressed is: " + key);
   //  }  
     
-    return pressed[keyCode];
+    return currentlyPressed[keyCode];
   }
   
   
@@ -42,16 +54,21 @@ public class Input implements KeyListener {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
+  
   @Override
   public void keyPressed(KeyEvent e) {
     
-    pressed[e.getKeyCode()] = true;
+    currentlyPressed[e.getKeyCode()] = true;
   }
 
+  
   @Override
   public void keyReleased(KeyEvent e) {
     
-    pressed[e.getKeyCode()] = false;
+    currentlyPressed[ e.getKeyCode() ] = false;
+    pressed[ e.getKeyCode() ] = false;
+    
   }
+  
   
 }

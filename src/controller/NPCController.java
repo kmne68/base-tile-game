@@ -12,7 +12,7 @@ import entity.NPC;
  *
  * @author kmne6
  */
-public class NPCController implements Controller {
+public class NPCController implements EntityController {
   
   private boolean up;
   private boolean right;

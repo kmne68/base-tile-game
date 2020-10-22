@@ -6,7 +6,6 @@
 package entity;
 
 import ai.AIManager;
-import controller.Controller;
 import entity.action.Action;
 import entity.action.Cough;
 import entity.effect.Sick;
@@ -14,6 +13,7 @@ import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import java.util.Optional;
+import controller.EntityController;
 
 /**
  *
@@ -23,8 +23,8 @@ public class NPC extends MovingEntity {
   
   private AIManager aiManager;
 
-  public NPC(Controller controller, SpriteLibrary spriteLibrary) {
-    super(controller, spriteLibrary);
+  public NPC(EntityController entityController, SpriteLibrary spriteLibrary) {
+    super(entityController, spriteLibrary);
     
     animationManager = new AnimationManager(spriteLibrary.getUnit("dave"));
     aiManager = new AIManager();

@@ -5,9 +5,9 @@
  */
 package entity;
 
-import controller.Controller;
 import entity.effect.Caffeinated;
 import gfx.SpriteLibrary;
+import controller.EntityController;
 
 /**
  *
@@ -15,8 +15,8 @@ import gfx.SpriteLibrary;
  */
 public class Player extends MovingEntity {
   
-  public Player(Controller controller, SpriteLibrary spriteLibrary) {
-    super(controller, spriteLibrary);
+  public Player(EntityController entityController, SpriteLibrary spriteLibrary) {
+    super(entityController, spriteLibrary);
     
     effects.add(new Caffeinated() );
   }

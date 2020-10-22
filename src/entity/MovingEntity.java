@@ -5,7 +5,6 @@
  */
 package entity;
 
-import controller.Controller;
 import core.CollisionBox;
 import core.Direction;
 import core.Motion;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
+import controller.EntityController;
 
 /**
  *
@@ -30,7 +30,7 @@ import java.util.stream.Stream;
  */
 public abstract class MovingEntity extends GameObject {
   
-  private Controller controller;
+  private EntityController entityController;
   protected Motion motion;
   protected AnimationManager animationManager;
   protected Direction direction;
@@ -40,10 +40,10 @@ public abstract class MovingEntity extends GameObject {
   protected Size collisionBoxSize;
   
   
-  public MovingEntity(Controller controller, SpriteLibrary spriteLibrary) {
+  public MovingEntity(EntityController entityController, SpriteLibrary spriteLibrary) {
     super();
     
-    this.controller = controller;
+    this.entityController = entityController;
     this.motion = new Motion(2);
     this.direction = Direction.South;
     this.animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
@@ -109,8 +109,8 @@ public abstract class MovingEntity extends GameObject {
   }
   
 
-  public Controller getController() {
-    return controller;
+  public EntityController getController() {
+    return entityController;
   }
 
   
@@ -130,7 +130,7 @@ public abstract class MovingEntity extends GameObject {
   private void handleMotion() {
     
     if(!action.isPresent()) {
-      motion.update(controller);
+      motion.update(entityController);
     } else {
       motion.stop(true, true);
     }
