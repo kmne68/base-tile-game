@@ -11,6 +11,7 @@ import core.Position;
 import core.Size;
 import entity.NPC;
 import entity.Player;
+import entity.SelectionCircle;
 import entity.action.Cough;
 import entity.effect.Sick;
 import game.Game;
@@ -51,6 +52,9 @@ public class GameState extends State {
     // camera.focusOn(npc);
     camera.focusOn(player);
     
+    SelectionCircle circle = new SelectionCircle();
+    circle.setParent(player);
+    gameObjects.add(circle);
     
     initializeNPCs(200);
     makeNumberOfNPCsSick(10);
