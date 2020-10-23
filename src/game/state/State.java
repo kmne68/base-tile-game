@@ -83,7 +83,7 @@ public abstract class State {
    */
   private void sortObjectsByPosition() {
     
-    gameObjects.sort(Comparator.comparing(gameObject -> gameObject.getPosition().getY()));
+    gameObjects.sort(Comparator.comparing(GameObject::getRenderOrder).thenComparing(gameObject -> gameObject.getPosition().getY()));
     
     // TODO: add attribute to objects to determine whether they are rendered
     // before or after the player object

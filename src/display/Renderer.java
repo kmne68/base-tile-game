@@ -32,8 +32,8 @@ public class Renderer {
             .filter(gameObject -> camera.isInView(gameObject))
             .forEach(gameObject -> graphics.drawImage(
             gameObject.getSprite(),            
-            gameObject.getPosition().intX() - camera.getPosition().intX() - gameObject.getSize().getWidth() / 2,
-            gameObject.getPosition().intY() - camera.getPosition().intY() - gameObject.getSize().getHeight() / 2,
+            gameObject.getRenderPosition(camera).intX(),
+            gameObject.getRenderPosition(camera).intY(),
             null
     ));
   }

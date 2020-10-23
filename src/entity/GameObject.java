@@ -8,6 +8,7 @@ package entity;
 import core.CollisionBox;
 import core.Position;
 import core.Size;
+import display.Camera;
 import game.state.State;
 import java.awt.Image;
 
@@ -18,14 +19,19 @@ import java.awt.Image;
 public abstract class GameObject {
   
   protected Position position;
+  protected Position renderOffset;
   protected Size size;
   private GameObject parent;
+  
+  protected int renderOrder;
   
   
   public GameObject() {
     
-    position = new Position(50.0, 50.0);
-    size = new Size(50, 50);
+    position = new Position(0, 0);
+    size = new Size(64, 64);
+    renderOffset = new Position(0, 0);
+    renderOrder = 5;
   }
   
   
@@ -66,7 +72,18 @@ public abstract class GameObject {
   public void setParent(GameObject parent) {
     this.parent = parent;
   }
-  
+
+  public Position getRenderPosition(Camera camera) {
+    
+    return new Position(
+            getPosition().getX() - camera.getPosition().getX() - renderOffset.getX(),
+            getPosition().getY() - camera.getPosition().getY() - renderOffset.getY()
+    );
+  }
+
+  public int getRenderOrder() {
+    return renderOrder;
+  }
   
   
   
