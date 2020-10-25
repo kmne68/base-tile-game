@@ -22,7 +22,7 @@ public abstract class GameObject {
   protected Position renderOffset;
   protected Position collisionBoxOffset;
   protected Size size;
-  private GameObject parent;
+  protected GameObject parent;
   
   protected int renderOrder;
   
@@ -85,6 +85,13 @@ public abstract class GameObject {
 
   public int getRenderOrder() {
     return renderOrder;
+  }
+    
+  
+  protected void clearParent() {
+   
+    parent = null;
+    
   }
   
   

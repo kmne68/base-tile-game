@@ -10,6 +10,7 @@ import core.Direction;
 import core.Motion;
 import core.Position;
 import core.Size;
+import core.Vector2D;
 import entity.action.Action;
 import entity.effect.Effect;
 import entity.effect.Sick;
@@ -37,6 +38,7 @@ public abstract class MovingEntity extends GameObject {
   protected List<Effect> effects;
   protected Optional<Action> action;
   
+  protected Vector2D directionVector;
   protected Size collisionBoxSize;
   
   
@@ -46,6 +48,7 @@ public abstract class MovingEntity extends GameObject {
     this.entityController = entityController;
     this.motion = new Motion(2);
     this.direction = Direction.South;
+    this.directionVector = new Vector2D(0, 0);
     this.animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
     effects = new ArrayList<>();
     action = Optional.empty();
@@ -94,6 +97,7 @@ public abstract class MovingEntity extends GameObject {
     
     if(motion.isMoving() ) {
         this.direction = Direction.fromMotion(motion);
+        this.directionVector = motion.getDirection();
     }    
   }
   
@@ -116,6 +120,7 @@ public abstract class MovingEntity extends GameObject {
   }
 
   
+  // in video, this method was removed in episode 35
   public void multiplySpeed(double multiplier) {
     motion.multiply(multiplier);
   }
@@ -199,6 +204,16 @@ public abstract class MovingEntity extends GameObject {
     
     return effects.stream()
             .anyMatch(effect -> aClass.isInstance(effect));
+  }
+  
+  
+  public boolean isFacing(Position other) {
+    
+    Vector2D direction = Vector2D.directionBetweenPositions(other, getPosition());
+    double dotProduct = Vector2D.dotProduct(direction, directionVector);
+    
+    // If the dot product is larger than zero, the tagret is ahead of us
+    return dotProduct > 0;
   }
   
 }

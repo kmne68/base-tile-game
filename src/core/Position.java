@@ -105,7 +105,14 @@ public class Position {
   }
   
   
-  
+  public double distanceTo(Position other) {
+    
+    double deltaX = this.getX() - other.getX();
+    double deltaY = this.getY() - other.getY();
+    
+    return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+  }
 
   
 }
