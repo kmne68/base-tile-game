@@ -6,27 +6,28 @@
 package entity;
 
 import ai.AIManager;
-import entity.action.Action;
-import entity.action.Cough;
-import entity.effect.Sick;
+import entity.humanoid.action.Action;
+import entity.humanoid.action.Cough;
+import entity.humanoid.effect.Sick;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import java.util.Optional;
 import controller.EntityController;
+import entity.humanoid.Humanoid;
 
 /**
  *
  * @author kmne6
  */
-public class NPC extends MovingEntity {
+public class NPC extends Humanoid {
   
   private AIManager aiManager;
 
   public NPC(EntityController entityController, SpriteLibrary spriteLibrary) {
     super(entityController, spriteLibrary);
     
-    animationManager = new AnimationManager(spriteLibrary.getUnit("dave"));
+    animationManager = new AnimationManager(spriteLibrary.getSpriteSet("dave"));
     aiManager = new AIManager();
   }
   
@@ -45,8 +46,4 @@ public class NPC extends MovingEntity {
     }
   }
 
-  void clearEffects() {
-    effects.clear();
-  }
-  
 }
