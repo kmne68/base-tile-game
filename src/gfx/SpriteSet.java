@@ -23,6 +23,14 @@ public class SpriteSet {
   }
   
   
+  public SpriteSet(Image image) {
+    
+    this.animationSheets = new HashMap<>();
+    addSheet("default", image);
+  }
+  
+  
+  
   public void addSheet(String name, Image animationSheet) {
     
     animationSheets.put(name, animationSheet);
@@ -30,9 +38,12 @@ public class SpriteSet {
   }
   
   
-  public Image get(String name) {
+  public Image getOrGetDefault(String name) {
     
-    return animationSheets.get(name);
+    if(animationSheets.containsKey(name)) {
+      return animationSheets.get(name);
+    }
     
+    return animationSheets.get("default");
   }
 }

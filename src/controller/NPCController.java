@@ -59,5 +59,10 @@ public class NPCController implements EntityController {
     down = false;
     left = false;
   }
+
+  @Override
+  public boolean isRequestingAction() {
+    return false;
+  }
   
 }

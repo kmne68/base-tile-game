@@ -8,6 +8,7 @@ package game.state;
 import core.Position;
 import core.Size;
 import display.Camera;
+import entity.Bubble;
 import entity.GameObject;
 import entity.MovingEntity;
 import game.Time;
@@ -51,7 +52,7 @@ public abstract class State {
   public void update() {    
     time.update();
     sortObjectsByPosition();
-    gameObjects.forEach(gameOjbect -> gameOjbect.update(this));
+    updateGameObjects();
     uiContainers.forEach(uiContainer -> uiContainer.update(this));
     camera.update(this);
   }
@@ -118,5 +119,22 @@ public abstract class State {
             .filter(aClass::isInstance)
             .map(gameObject -> (T) gameObject)
             .collect(Collectors.toList());
+  }
+
+  public SpriteLibrary getSpriteLibrary() {
+    return spriteLibrary;
+  }
+
+  
+  public void spawn(GameObject gameObject) {
+    
+    gameObjects.add(gameObject);
+  }
+
+  private void updateGameObjects() {
+    
+    for(int i = 0; i < gameObjects.size(); i++) {
+      gameObjects.get(i).update(this);      
+    }
   }
 }
