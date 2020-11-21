@@ -69,7 +69,12 @@ public abstract class MovingEntity extends GameObject {
   @Override
   public Image getSprite() {
     
-    return animationManager.getSprite();
+    Image sprite = animationManager.getSprite();
+//    sprite.toString();
+//    System.out.println("sprite is null? " + sprite.equals(null) );
+    
+    return sprite;
+  //  return animationManager.getSprite();
   }
 
   
@@ -85,15 +90,15 @@ public abstract class MovingEntity extends GameObject {
   protected abstract String selectAnimation();
   
 
-  public EntityController getController() {
+  public EntityController getEntityController() {
     return entityController;
   }
 
   
   // in video, this method was removed in episode 35
-  public void multiplySpeed(double multiplier) {
-    motion.multiply(multiplier);
-  }
+//  public void multiplySpeed(double multiplier) {
+//    motion.multiply(multiplier);
+//  }
 
   
 

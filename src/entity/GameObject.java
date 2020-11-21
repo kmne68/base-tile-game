@@ -72,6 +72,7 @@ public abstract class GameObject {
   }
 
   public void setParent(GameObject parent) {
+    this.position = new Position(0, 0);
     this.parent = parent;
   }
 
@@ -99,6 +100,11 @@ public abstract class GameObject {
     return renderOffset;
   }
   
+  
+  public void setRenderOrder(int renderOrder) {
+    
+    this.renderOrder = renderOrder;
+  }
   
   
 }

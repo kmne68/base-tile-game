@@ -27,7 +27,8 @@ public class Caffeinated extends Effect {
   @Override
   public void update(State state, entity.humanoid.Humanoid entity) {
     super.update(state, entity);
-    
-    entity.multiplySpeed(speedMultiplier);
+   
+  // The multiplySpeed() method was removed in episode 35 but remains in the Entity class (commented out)  
+  //  entity.multiplySpeed(speedMultiplier);
   }
 }

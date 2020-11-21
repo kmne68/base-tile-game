@@ -77,9 +77,11 @@ public class Player extends Humanoid {
     return state.getGameObjectsOfClass(NPC.class).stream()
             .filter(npc -> getPosition().distanceTo(npc.getPosition()) < targetRange)
             .filter(npc -> isFacing(npc.getPosition()) )
+            .filter(npc -> !npc.isAffectedBy(Untargetable.class))
             .min(Comparator.comparingDouble(npc -> position.distanceTo(npc.getPosition())));
   }
 
+  
   private void handleInput(State state) {
     
     if(entityController.isRequestingAction()) {

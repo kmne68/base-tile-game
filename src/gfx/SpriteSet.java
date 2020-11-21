@@ -24,15 +24,16 @@ public class SpriteSet {
   
   
   public SpriteSet(Image image) {
-    
+    System.out.println("Begin SpriteSet constructor");
     this.animationSheets = new HashMap<>();
     addSheet("default", image);
+    System.out.println("Leaving SpriteSet constructor");
   }
   
   
   
   public void addSheet(String name, Image animationSheet) {
-    
+    System.out.println("SpriteSet.addSheet name: " + name);
     animationSheets.put(name, animationSheet);
     
   }
@@ -40,7 +41,10 @@ public class SpriteSet {
   
   public Image getOrGetDefault(String name) {
     
+    System.out.println("SpriteSheet.getOrGetDefault() name: " + name);
+    
     if(animationSheets.containsKey(name)) {
+      System.out.println("animationSheets.containsKey(name): " + animationSheets.containsKey(name));
       return animationSheets.get(name);
     }
     

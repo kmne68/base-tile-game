@@ -41,14 +41,15 @@ public class AnimationManager {
     this.currentFrameTime = 0;
     this.directionIndex = 0;
     this.looping = looping;
-    currentAnimationName = "";
-    
+    currentAnimationName = "";    
     playAnimation("stand");
   }
   
   
   public Image getSprite() {
     
+  //  System.out.println("currentAnimationSheet is null?" + currentAnimationSheet.equals(null));
+  //  System.out.println("currentAnimationSheet class: " + currentAnimationSheet.getClass() );
     return currentAnimationSheet.getSubimage(
             frameIndex * Game.SPRITE_SIZE,
             directionIndex * Game.SPRITE_SIZE,
@@ -77,12 +78,13 @@ public class AnimationManager {
   
   
   public void playAnimation(String name) {
-    
+    // System.out.println("playAnimation() name: " + name);
     if(!name.equals(currentAnimationName)) {
       // we cast to a Buffered Image to take advantage of that class' getSubmimage method
       this.currentAnimationSheet = (BufferedImage) spriteSet.getOrGetDefault(name);
       currentAnimationName = name;
       frameIndex = 0;
+      System.out.println("Leaving AnimationManager.playAnimation()");
     }
   }
   

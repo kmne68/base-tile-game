@@ -25,7 +25,8 @@ public class ImageUtils {
   public static final int ALPHA_BLEND = 3;
   
   public static Image loadImage(String filePath) {    
-    try {      
+    try {
+      System.out.println("ImageUtils.loadImage() begin...");
       Image imageFromDisk = ImageIO.read(ImageUtils.class.getResource(filePath));
       BufferedImage compatibleImage = (BufferedImage)
               createCompatibleImage(
@@ -36,7 +37,7 @@ public class ImageUtils {
       Graphics2D graphics = compatibleImage.createGraphics();
       graphics.drawImage(imageFromDisk, 0, 0, null);
       graphics.dispose();
-      
+      System.out.println("End ImageUtils.loadImage() end");
       return compatibleImage;
       
     } catch(IOException e) {
@@ -48,12 +49,12 @@ public class ImageUtils {
   }
   
   public static Image createCompatibleImage(Size size, int transparency) {
-    
+  //  System.out.println("Begin ImageUtils.createCompatibleImage()...");
     GraphicsConfiguration graphicsConfiguration = 
             GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getDefaultScreenDevice()
             .getDefaultConfiguration();
-    
+  //  System.out.println("Leaving ImageUtils.createCompatibleImage()");
     return graphicsConfiguration.createCompatibleImage(size.getWidth(), size.getHeight(), transparency);
   }
 }

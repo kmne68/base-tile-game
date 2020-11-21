@@ -40,7 +40,7 @@ public class Game {
     input = new Input();
     display = new Display(width, height, input);
     state = new GameState(new Size(width, height), input);
-    settings = new GameSettings(true);
+    settings = new GameSettings(false);
     gameController = new GameController(input);
   }
   

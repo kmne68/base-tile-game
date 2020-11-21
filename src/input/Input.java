@@ -19,8 +19,8 @@ public class Input implements KeyListener {
   
   
   public Input() {
-    pressed = new boolean[255];
-    currentlyPressed = new boolean[255];
+    pressed = new boolean[1000];
+    currentlyPressed = new boolean[1000];
   }
   
   

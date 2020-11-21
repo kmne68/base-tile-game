@@ -5,11 +5,7 @@
  */
 package gfx;
 
-import game.Game;
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
@@ -48,9 +44,9 @@ public class SpriteLibrary {
               fileName.substring(0, fileName.length() - 4),
               ImageUtils.loadImage(path + "/" + fileName));
     }
-
   }
 
+  
   private void loadSpriteSets(String path) {
 
     String[] folderNames = getFolderNames(path);

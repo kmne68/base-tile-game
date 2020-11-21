@@ -120,6 +120,7 @@ public abstract class State {
             .map(gameObject -> (T) gameObject)
             .collect(Collectors.toList());
   }
+  
 
   public SpriteLibrary getSpriteLibrary() {
     return spriteLibrary;
@@ -130,6 +131,7 @@ public abstract class State {
     
     gameObjects.add(gameObject);
   }
+  
 
   private void updateGameObjects() {
     
