@@ -9,7 +9,7 @@ package core;
  *
  * @author kmne6
  */
-class Vector2D {
+public class Vector2D {
   
     private double x;
     private double y;
@@ -19,7 +19,28 @@ class Vector2D {
     this.x = x;
     this.y = y;
   }
+  
+  
+  public static Vector2D copyOf(Vector2D vector) {
+    
+    return new Vector2D(vector.getX(), vector.getY());
+  }
 
+  
+  public static Vector2D directionBetweenPositions(Position start, Position end) {
+    
+    Vector2D direction = new Vector2D(start.getX() - end.getX(), start.getY() - end.getY());
+    direction.normalize();
+    
+    return direction;
+  }
+  
+  
+  public static double dotProduct(Vector2D v1, Vector2D v2) {
+    
+    return v1.getX() * v2.getX() + v1.getY() * v2.getY();
+  }
+  
   
   public double length() {
     
