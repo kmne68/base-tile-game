@@ -28,6 +28,6 @@ public class Caffeinated extends Effect {
   public void update(State state, MovingEntity entity) {
     super.update(state, entity);
     
-    entity.multiplySpeed(speedMultiplier);
+  //  entity.multiplySpeed(speedMultiplier);
   }
 }

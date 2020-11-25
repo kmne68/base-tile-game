@@ -33,7 +33,7 @@ public class Player extends MovingEntity {
     this.selectionCircle = selectionCircle;
     this.targetRange = Game.SPRITE_SIZE;
     
-  //  effects.add(new Caffeinated() );
+    // effects.add(new Caffeinated() );
   }
   
   
@@ -57,6 +57,18 @@ public class Player extends MovingEntity {
   private void handleTarget(State state) {
 
     Optional<NPC> closestNPC = findClosestNPC(state);
+    
+    if(closestNPC.isPresent()) {
+      NPC npc = closestNPC.get();
+      
+      if(!npc.equals(target)) {
+        selectionCircle.setParent(npc);
+        target = npc;
+      }
+    } else {
+      selectionCircle.clearParent();
+      target = null;      
+    }
   }
   
 

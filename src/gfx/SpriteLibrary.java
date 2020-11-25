@@ -66,7 +66,7 @@ public class SpriteLibrary {
       }
 
       units.put(folderName, spriteSet);
-      System.out.println("folder name: " + folderName + ", sprite set: " + spriteSet);
+    //  System.out.println("folder name: " + folderName + ", sprite set: " + spriteSet);
     }
 
   }
@@ -96,7 +96,7 @@ public class SpriteLibrary {
 
   public SpriteSet getUnit(String name) {
 
-    System.out.println("name: " + units.get(name));
+  //  System.out.println("name: " + units.get(name));
     return units.get(name);
 
   }
