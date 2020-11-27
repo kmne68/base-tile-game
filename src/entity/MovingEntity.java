@@ -35,8 +35,7 @@ public abstract class MovingEntity extends GameObject {
   protected Motion motion;
   protected AnimationManager animationManager;
   protected Direction direction;
-  protected List<Effect> effects;
-  protected Optional<Action> action;
+
   protected Vector2D directionVector;
   
   protected Size collisionBoxSize;
@@ -50,11 +49,7 @@ public abstract class MovingEntity extends GameObject {
     this.direction = Direction.South;
     this.directionVector = new Vector2D(0, 0);
     this.animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
-    effects = new ArrayList<>();
-    action = Optional.empty();
-    this.collisionBoxSize = new Size(16, 28);
-    this.renderOffset = new Position(size.getWidth() / 2, size.getHeight() - 12);
-    this.collisionBoxOffset = new Position(collisionBoxSize.getWidth() / 2, collisionBoxSize.getHeight());
+
   }
   
   
@@ -72,10 +67,10 @@ public abstract class MovingEntity extends GameObject {
   @Override
   public void update(State state) {
   
-    handleAction(state);
+    handleAction(state);  
+    motion.update(entityController);
     handleMotion();
     animationManager.update(direction);
-    effects.forEach(effect -> effect.update(state, this));
     
     handleCollisions(state);
     manageDirection();
@@ -102,17 +97,7 @@ public abstract class MovingEntity extends GameObject {
   }
   
 
-  private void selectAnimation() {
-    
-    if(action.isPresent()) {
-      animationManager.playAnimation(action.get().getAnimationName());
-    } else if( motion.isMoving() ) {
-      animationManager.playAnimation("walk");
-    }
-    else {
-      animationManager.playAnimation("stand");
-    }    
-  }
+  protected abstract String selectAnimation();
   
 
   public EntityController getController() {
@@ -124,24 +109,6 @@ public abstract class MovingEntity extends GameObject {
 //    motion.multiply(multiplier);
 //  }
 
-  
-  private void handleAction(State state) {
-    
-    if(action.isPresent()) {
-      action.get().update(state, this);
-    }      
-  }
-  
-
-  private void handleMotion() {
-    
-    if(!action.isPresent()) {
-      motion.update(entityController);
-    } else {
-      motion.stop(true, true);
-    }
-  }
-  
   
   public void addEffect(Effect effect) {
     
@@ -157,6 +124,9 @@ public abstract class MovingEntity extends GameObject {
   private void handleCollisions(State state) {
     state.getCollidingGameObjects(this).forEach(this::handleCollision);
   }
+  
+  
+  protected abstract void handleMotion();
   
   
   protected abstract void handleCollision(GameObject other);
