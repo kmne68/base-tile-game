@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity.effect;
+package entity.humanoid.effect;
 
-import entity.MovingEntity;
+import entity.Humanoid;
 import game.GameLoop;
 import game.state.State;
 
@@ -25,7 +25,7 @@ public class Caffeinated extends Effect {
   
   
   @Override
-  public void update(State state, MovingEntity entity) {
+  public void update(State state, Humanoid entity) {
     super.update(state, entity);
     
   //  entity.multiplySpeed(speedMultiplier);

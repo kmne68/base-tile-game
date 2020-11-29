@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity.action;
+package entity.humanoid.action;
 
-import entity.MovingEntity;
+import entity.Humanoid;
 import game.state.State;
 
 /**
@@ -14,7 +14,7 @@ import game.state.State;
  */
 public abstract class Action {
   
-  public abstract void update(State state, MovingEntity entity);
+  public abstract void update(State state, Humanoid humanoid);
   public abstract boolean isDone();
   public abstract String getAnimationName();
   

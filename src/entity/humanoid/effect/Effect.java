@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity.effect;
+package entity.humanoid.effect;
 
-import entity.MovingEntity;
+import entity.Humanoid;
 import game.state.State;
 
 /**
@@ -22,7 +22,7 @@ public abstract class Effect {
   }
   
   
-  public void update(State state, MovingEntity entity) {
+  public void update(State state, Humanoid entity) {
     lifespanInUpdates--;
   }
   

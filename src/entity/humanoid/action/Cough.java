@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity.action;
+package entity.humanoid.action;
 
 import core.CollisionBox;
 import core.Position;
 import core.Size;
-import entity.MovingEntity;
-import entity.effect.Sick;
+import entity.Humanoid;
+import entity.humanoid.effect.Sick;
 import game.Game;
 import game.GameLoop;
 import game.state.State;
@@ -33,7 +33,7 @@ public class Cough extends Action {
   
 
   @Override
-  public void update(State state, MovingEntity entity) {
+  public void update(State state, Humanoid entity) {
     if(--lifespanInSeconds <= 0) {
       Position spreadAreaPosition = new Position(
              entity.getPosition().getX() - spreadAreaSize.getWidth() / 2,
@@ -42,7 +42,7 @@ public class Cough extends Action {
      
       CollisionBox spreadArea = CollisionBox.of(spreadAreaPosition, spreadAreaSize);
       
-      state.getGameObjectsOfClass(MovingEntity.class).stream()
+      state.getGameObjectsOfClass(Humanoid.class).stream()
               .filter(movingEntity -> movingEntity.getCollisionBox().collidesWith(spreadArea))
               .filter(movingEntity -> !movingEntity.isAffectedBy(Sick.class))
               .forEach(movingEntity -> {

@@ -9,7 +9,7 @@ import core.Position;
 import core.Size;
 import display.Camera;
 import entity.GameObject;
-import entity.MovingEntity;
+import entity.Humanoid;
 import game.Time;
 import gfx.SpriteLibrary;
 import input.Input;

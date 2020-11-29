@@ -9,9 +9,8 @@ import controller.EntityController;
 import core.Position;
 import core.Size;
 import entity.GameObject;
-import entity.MovingEntity;
-import entity.action.Action;
-import entity.effect.Effect;
+import entity.humanoid.action.Action;
+import entity.humanoid.effect.Effect;
 import game.state.State;
 import gfx.SpriteLibrary;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.Optional;
  *
  * @author kmne6
  */
-public class Humanoid extends MovingEntity {
+public class Humanoid extends entity.Humanoid {
   
   
   protected List<Effect> effects;
@@ -43,15 +42,23 @@ public class Humanoid extends MovingEntity {
   }
   
   
-    @Override
+  private void cleanup() {
+    List.copyOf(effects).stream()
+            .filter(Effect::shouldDelete)
+            .forEach(effects::remove);
+    
+    if(action.isPresent() && action.get().isDone()) {
+      action = Optional.empty();
+    }
+  }
+  
+  
+  @Override
   public void update(State state) {
   
     handleAction(state);
     effects.forEach(effect -> effect.update(state, this));
     
-    selectAnimation();
-    
-    position.apply(motion);
     cleanup();
   }
   
@@ -77,4 +84,40 @@ public class Humanoid extends MovingEntity {
     }
   }
   
+  
+  @Override
+  protected String selectAnimation() {
+    
+    if(action.isPresent()) {
+      return action.get().getAnimationName();
+    } else if(motion.isMoving()) {
+      return "walk";
+    }
+      
+    return "stand";
+  }
+  
+  
+  protected void clearEffects() {
+    effects.clear();
+  }
+  
+  
+  public void addEffect(Effect effect) {
+    
+    effects.add(effect);
+  }
+  
+  
+  public void perform(Action action) {
+    
+    this.action = Optional.of(action);
+  }  
+  
+  
+  public boolean isAffectedBy(Class<?> aClass) {
+    
+    return effects.stream()
+            .anyMatch(effect -> aClass.isInstance(effect));
+  }
 }

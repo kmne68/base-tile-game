@@ -5,7 +5,7 @@
  */
 package entity;
 
-import entity.effect.Caffeinated;
+import entity.humanoid.effect.Caffeinated;
 import gfx.SpriteLibrary;
 import controller.EntityController;
 import core.Position;
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  *
  * @author kmne6
  */
-public class Player extends MovingEntity {
+public class Player extends Humanoid {
   
   
   private NPC target;

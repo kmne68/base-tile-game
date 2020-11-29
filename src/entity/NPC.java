@@ -6,9 +6,9 @@
 package entity;
 
 import ai.AIManager;
-import entity.action.Action;
-import entity.action.Cough;
-import entity.effect.Sick;
+import entity.humanoid.action.Action;
+import entity.humanoid.action.Cough;
+import entity.humanoid.effect.Sick;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
@@ -19,7 +19,7 @@ import controller.EntityController;
  *
  * @author kmne6
  */
-public class NPC extends MovingEntity {
+public class NPC extends Humanoid {
   
   private AIManager aiManager;
 
