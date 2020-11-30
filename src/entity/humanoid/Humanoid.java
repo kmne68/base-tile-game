@@ -9,8 +9,10 @@ import controller.EntityController;
 import core.Position;
 import core.Size;
 import entity.GameObject;
+import entity.MovingEntity;
 import entity.humanoid.action.Action;
 import entity.humanoid.effect.Effect;
+import entity.humanoid.Humanoid;
 import game.state.State;
 import gfx.SpriteLibrary;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.Optional;
  *
  * @author kmne6
  */
-public class Humanoid extends entity.Humanoid {
+public class Humanoid extends MovingEntity {
   
   
   protected List<Effect> effects;
@@ -55,6 +57,7 @@ public class Humanoid extends entity.Humanoid {
   
   @Override
   public void update(State state) {
+    super.update(state);
   
     handleAction(state);
     effects.forEach(effect -> effect.update(state, this));

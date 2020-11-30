@@ -5,7 +5,8 @@
  */
 package entity.humanoid.effect;
 
-import entity.Humanoid;
+import entity.MovingEntity;
+import entity.humanoid.Humanoid;
 import game.state.State;
 
 /**
@@ -22,7 +23,7 @@ public abstract class Effect {
   }
   
   
-  public void update(State state, Humanoid entity) {
+  public void update(State state, Humanoid humanoid) {
     lifespanInUpdates--;
   }
   

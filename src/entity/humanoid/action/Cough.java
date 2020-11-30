@@ -8,11 +8,13 @@ package entity.humanoid.action;
 import core.CollisionBox;
 import core.Position;
 import core.Size;
-import entity.Humanoid;
+import entity.MovingEntity;
+import entity.humanoid.Humanoid;
 import entity.humanoid.effect.Sick;
 import game.Game;
 import game.GameLoop;
 import game.state.State;
+
 
 /**
  *
@@ -31,24 +33,23 @@ public class Cough extends Action {
     risk = 0.1;
   }
   
-
   @Override
-  public void update(State state, Humanoid entity) {
+  public void update(State state, Humanoid performer) {
     if(--lifespanInSeconds <= 0) {
       Position spreadAreaPosition = new Position(
-             entity.getPosition().getX() - spreadAreaSize.getWidth() / 2,
-             entity.getPosition().getY() - spreadAreaSize.getHeight() / 2
+             performer.getPosition().getX() - spreadAreaSize.getWidth() / 2,
+             performer.getPosition().getY() - spreadAreaSize.getHeight() / 2
       );
      
       CollisionBox spreadArea = CollisionBox.of(spreadAreaPosition, spreadAreaSize);
       
       state.getGameObjectsOfClass(Humanoid.class).stream()
-              .filter(movingEntity -> movingEntity.getCollisionBox().collidesWith(spreadArea))
-              .filter(movingEntity -> !movingEntity.isAffectedBy(Sick.class))
-              .forEach(movingEntity -> {
+              .filter(humanoid -> humanoid.getCollisionBox().collidesWith(spreadArea))
+              .filter(humanoid -> !humanoid.isAffectedBy(Sick.class))
+              .forEach(humanoid -> {
                 
                 if(Math.random() < risk) {
-                  movingEntity.addEffect(new Sick());
+                  humanoid.addEffect(new Sick());
                 }
               });
     }

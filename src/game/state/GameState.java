@@ -7,25 +7,15 @@ package game.state;
 
 import controller.NPCController;
 import controller.PlayerController;
-import core.Position;
 import core.Size;
 import entity.NPC;
 import entity.Player;
 import entity.SelectionCircle;
-import entity.humanoid.action.Cough;
 import entity.humanoid.effect.Sick;
-import game.Game;
 import game.ui.UIGameTime;
 import game.ui.UISicknessStatistics;
 import input.Input;
-import java.awt.Color;
 import map.GameMap;
-import ui.Alignment;
-import ui.HorizontalContainer;
-import ui.UIContainer;
-import ui.Spacing;
-import ui.UIText;
-import ui.VerticalContainer;
 
 /**
  *

@@ -9,6 +9,7 @@ import entity.humanoid.effect.Caffeinated;
 import gfx.SpriteLibrary;
 import controller.EntityController;
 import core.Position;
+import entity.humanoid.Humanoid;
 import game.Game;
 import game.state.State;
 import java.util.Comparator;
@@ -47,11 +48,7 @@ public class Player extends Humanoid {
 
   @Override
   protected void handleCollision(GameObject other) {
-    
-    if(other instanceof NPC) {
-      NPC npc = (NPC) other;
-      npc.clearEffects();   // this clears whatever effect is on the NPC when they collide with out player
-    }
+
   }
 
   private void handleTarget(State state) {

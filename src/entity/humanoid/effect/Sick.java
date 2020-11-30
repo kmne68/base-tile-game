@@ -5,7 +5,8 @@
  */
 package entity.humanoid.effect;
 
-import entity.Humanoid;
+import entity.MovingEntity;
+import entity.humanoid.Humanoid;
 import entity.humanoid.action.Cough;
 import game.GameLoop;
 import game.state.State;
@@ -17,7 +18,7 @@ import game.state.State;
 public class Sick extends Effect {
   
   
-  private static final double COUGH_RATE = 1d / GameLoop.UPDATES_PER_SECOND / 1;
+  private static final double COUGH_RATE = 1d / GameLoop.UPDATES_PER_SECOND / 10;
   
   
   public Sick() {
@@ -27,11 +28,11 @@ public class Sick extends Effect {
   
   
   @Override
-  public void update(State state, Humanoid entity) {
-    super.update(state, entity);
+  public void update(State state, Humanoid humanoid) {
+    super.update(state, humanoid);
     
     if(Math.random() < COUGH_RATE) {
-      entity.perform(new Cough());
+      humanoid.perform(new Cough());
     }
   }
   

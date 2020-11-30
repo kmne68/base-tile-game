@@ -6,7 +6,8 @@
 package game.ui;
 
 import core.Size;
-import entity.Humanoid;
+import entity.MovingEntity;
+import entity.humanoid.Humanoid;
 import entity.humanoid.effect.Sick;
 import game.state.State;
 import ui.HorizontalContainer;
@@ -49,16 +50,12 @@ public class UISicknessStatistics extends HorizontalContainer {
   public void update(State state) {
     super.update(state);
 
-    long sickCount = state.getGameObjects().stream()
-            .filter(gameObject -> gameObject instanceof Humanoid)
-            .map(gameObject -> (Humanoid) gameObject)
-            .filter(movingEntity -> movingEntity.isAffectedBy(Sick.class))
+    long sickCount = state.getGameObjectsOfClass(Humanoid.class).stream()
+            .filter(humanoid -> humanoid.isAffectedBy(Sick.class))
             .count();
 
-    long healthyCount = state.getGameObjects().stream()
-            .filter(gameObject -> gameObject instanceof Humanoid)
-            .map(gameObject -> (Humanoid) gameObject)
-            .filter(movingEntity -> !movingEntity.isAffectedBy(Sick.class))
+    long healthyCount = state.getGameObjectsOfClass(Humanoid.class).stream()
+            .filter(humanoid -> !humanoid.isAffectedBy(Sick.class))
             .count();
     
     numberOfSick.setText(String.valueOf(sickCount));

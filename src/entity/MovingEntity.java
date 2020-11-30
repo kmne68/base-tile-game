@@ -5,24 +5,19 @@
  */
 package entity;
 
-import core.CollisionBox;
-import core.Direction;
-import core.Motion;
-import core.Position;
-import core.Size;
-import core.Vector2D;
+import controller.EntityController;
+import core.*;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import java.awt.Image;
 import java.awt.Rectangle;
-import controller.EntityController;
 
 /**
  *
  * @author kmne6
  */
-public abstract class Humanoid extends GameObject {
+public abstract class MovingEntity extends GameObject {
   
   private EntityController entityController;
   protected Motion motion;
@@ -34,14 +29,14 @@ public abstract class Humanoid extends GameObject {
   protected Size collisionBoxSize;
   
   
-  public Humanoid(EntityController entityController, SpriteLibrary spriteLibrary) {
+  public MovingEntity(EntityController entityController, SpriteLibrary spriteLibrary) {
     super();
     
     this.entityController = entityController;
     this.motion = new Motion(2);
     this.direction = Direction.South;
     this.directionVector = new Vector2D(0, 0);
-    this.animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
+    this.animationManager = new AnimationManager(spriteLibrary.getSpriteSet("matt"));
 
   }
 

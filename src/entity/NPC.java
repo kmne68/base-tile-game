@@ -9,6 +9,7 @@ import ai.AIManager;
 import entity.humanoid.action.Action;
 import entity.humanoid.action.Cough;
 import entity.humanoid.effect.Sick;
+import entity.humanoid.Humanoid;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
@@ -26,7 +27,7 @@ public class NPC extends Humanoid {
   public NPC(EntityController entityController, SpriteLibrary spriteLibrary) {
     super(entityController, spriteLibrary);
     
-    animationManager = new AnimationManager(spriteLibrary.getUnit("dave"));
+    animationManager = new AnimationManager(spriteLibrary.getSpriteSet("dave"));
     aiManager = new AIManager();
   }
   
@@ -45,7 +46,7 @@ public class NPC extends Humanoid {
     }
   }
 
-  void clearEffects() {
+  protected void clearEffects() {
     effects.clear();
   }
   
