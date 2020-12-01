@@ -19,7 +19,7 @@ import java.awt.Rectangle;
  */
 public abstract class MovingEntity extends GameObject {
   
-  private EntityController entityController;
+  protected EntityController entityController;
   protected Motion motion;
   protected AnimationManager animationManager;
   protected Direction direction;
@@ -37,6 +37,7 @@ public abstract class MovingEntity extends GameObject {
     this.direction = Direction.South;
     this.directionVector = new Vector2D(0, 0);
     this.animationManager = new AnimationManager(spriteLibrary.getSpriteSet("matt"));
+    this.collisionBoxSize = new Size(size.getWidth(), size.getHeight());
 
   }
 

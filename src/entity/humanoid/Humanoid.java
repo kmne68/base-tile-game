@@ -12,7 +12,6 @@ import entity.GameObject;
 import entity.MovingEntity;
 import entity.humanoid.action.Action;
 import entity.humanoid.effect.Effect;
-import entity.humanoid.Humanoid;
 import game.state.State;
 import gfx.SpriteLibrary;
 import java.util.ArrayList;

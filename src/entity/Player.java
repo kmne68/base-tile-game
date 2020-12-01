@@ -5,16 +5,14 @@
  */
 package entity;
 
-import entity.humanoid.effect.Caffeinated;
 import gfx.SpriteLibrary;
 import controller.EntityController;
-import core.Position;
 import entity.humanoid.Humanoid;
+import entity.humanoid.action.BlowBubble;
 import game.Game;
 import game.state.State;
 import java.util.Comparator;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  *
@@ -42,7 +40,8 @@ public class Player extends Humanoid {
   public void update(State state) {
     super.update(state);
     
-    handleTarget(state);    
+    handleTarget(state);
+    handleInput(state);
   }
   
 
@@ -76,6 +75,15 @@ public class Player extends Humanoid {
             .filter(npc -> isFacing(npc.getPosition()))
             .min(Comparator.comparingDouble(npc -> position.distanceTo(npc.getPosition())));
     
+  }
+
+  private void handleInput(State state) {
+    
+    if(entityController.isRequestingAction()) {
+      if(target != null) {
+        perform(new BlowBubble(target));
+      }
+    }
   }
   
 }
