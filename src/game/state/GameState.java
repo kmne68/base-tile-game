@@ -27,7 +27,7 @@ public class GameState extends State {
   public GameState(Size windowSize, Input input) {
     super(windowSize, input);    
 
-    gameMap = new GameMap(new Size(20, 20), spriteLibrary);
+    gameMap = new GameMap(new Size(5, 5), spriteLibrary);   // Size was (20, 20)
     initializeCharacters();
     initializeUI(windowSize);
   }
@@ -45,8 +45,8 @@ public class GameState extends State {
     
     gameObjects.add(circle);
     
-    initializeNPCs(200);
-    makeNumberOfNPCsSick(10);
+    initializeNPCs(1);    // was 200
+    makeNumberOfNPCsSick(0); // was 10
   }
 
   private void initializeNPCs(int numberOfNPCs) {

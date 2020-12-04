@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package ai.state;
 
 import ai.AITransition;
@@ -10,50 +11,38 @@ import controller.NPCController;
 import core.Position;
 import entity.NPC;
 import game.state.State;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author kmne6
- */
 public class Wander extends AIState {
-  
-  private List<Position> targets;
-  
-  public Wander() {
-    super();
-    targets = new ArrayList<>();
-  }
-  
+    private List<Position> targets;
 
-  @Override
-  protected AITransition initializeTransition() {
-    
-    // if we have arrived transition to stand
-    return new AITransition("stand", ((state, currentCharacter) -> hasArrived(currentCharacter)));
-  }
+    public Wander() {
+        super();
+        targets = new ArrayList<>();
+    }
 
-  @Override
-  public void update(State state, NPC currentCharacter) {
-    
-    if(targets.isEmpty()) {
-      targets.add(state.getRandomPosition());      
+    @Override
+    protected AITransition initializeTransition() {
+        return new AITransition("stand", ((state, currentCharacter) -> arrived(currentCharacter)));
     }
-    
-    NPCController controller = (NPCController) currentCharacter.getController();
-    controller.moveToTarget(targets.get(0), currentCharacter.getPosition());
-    
-    if(hasArrived(currentCharacter)) {
-      controller.stop();
+
+    @Override
+    public void update(State state, NPC currentCharacter) {
+        if(targets.isEmpty()) {
+            targets.add(state.getRandomPosition());
+        }
+
+        NPCController controller = (NPCController) currentCharacter.getEntityController();
+        controller.moveToTarget(targets.get(0), currentCharacter.getPosition());
+
+        if(arrived(currentCharacter)) {
+            controller.stop();
+        }
     }
-    
-  }
-  
-  private boolean hasArrived(NPC currentCharacter) {
-    
-    return currentCharacter.getPosition().isInRangeOf(targets.get(0));
-  }
-  
-  
+
+    private boolean arrived(NPC currentCharacter) {
+        return currentCharacter.getPosition().isInRangeOf(targets.get(0));
+    }
 }

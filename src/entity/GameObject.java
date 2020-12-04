@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package entity;
 
 import core.CollisionBox;
@@ -10,93 +11,77 @@ import core.Position;
 import core.Size;
 import display.Camera;
 import game.state.State;
-import java.awt.Image;
 
-/**
- *
- * @author kmne6
- */
+import java.awt.*;
+
 public abstract class GameObject {
-  
-  protected Position position;
-  protected Position renderOffset;
-  protected Position collisionBoxOffset;
-  protected Size size;
-  protected GameObject parent;
-  
-  protected int renderOrder;
-  
-  
-  public GameObject() {
-    
-    position = new Position(0, 0);
-    size = new Size(64, 64);
-    renderOffset = new Position(0, 0);
-    collisionBoxOffset = new Position(0, 0);
-    renderOrder = 5;
-  }
-  
-  
-  public abstract void update(State state);
-  public abstract Image getSprite();
-  public abstract CollisionBox getCollisionBox();
-  
-  
-  public boolean collidesWith(GameObject other) {
-    
-    return getCollisionBox().collidesWith(other.getCollisionBox());
-  }
-  
+    protected Position position;
+    protected Position renderOffset;
+    protected Position collisionBoxOffset;
+    protected Size size;
 
-  public Position getPosition() {
-    
-    Position finalPosition = Position.copyOf(position);
-    
-    if(parent != null) {
-      finalPosition.add(parent.getPosition());
+    protected int renderOrder;
+
+    protected GameObject parent;
+
+    public GameObject() {
+        position = new Position(0, 0);
+        size = new Size(64, 64);
+        renderOffset = new Position(0, 0);
+        collisionBoxOffset = new Position(0, 0);
+        renderOrder = 5;
     }
-    
-    return finalPosition;
-  }
 
-  public void setPosition(Position position) {
-    this.position = position;
-  }
+    public abstract void update(State state);
+    public abstract Image getSprite();
+    public abstract CollisionBox getCollisionBox();
 
-  public Size getSize() {
-    return size;
-  }
+    public boolean collidesWith(GameObject other) {
+        return getCollisionBox().collidesWith(other.getCollisionBox());
+    }
 
-  public void setSize(Size size) {
-    this.size = size;
-  }
+    public Position getPosition() {
+        Position finalPosition = Position.copyOf(position);
 
-  public void setParent(GameObject parent) {
-    this.parent = parent;
-  }
+        if(parent != null) {
+            finalPosition.add(parent.getPosition());
+        }
 
-  public Position getRenderPosition(Camera camera) {
-    
-    return new Position(
-            getPosition().getX() - camera.getPosition().getX() - renderOffset.getX(),
-            getPosition().getY() - camera.getPosition().getY() - renderOffset.getY()
-    );
-  }
+        return finalPosition;
+    }
 
-  public int getRenderOrder() {
-    return renderOrder;
-  }
-  
-  
-  public void clearParent() {
-    
-    parent = null;
-  }  
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
-  Position getRenderOffset() {
-    
-    return renderOffset;
-  }
-  
-  
+    public Size getSize() {
+        return size;
+    }
+
+    public void parent(GameObject parent) {
+        this.position = new Position(0, 0);
+        this.parent = parent;
+    }
+
+    public Position getRenderPosition(Camera camera) {
+        return new Position(
+                getPosition().getX() - camera.getPosition().getX() - renderOffset.getX(),
+                getPosition().getY() - camera.getPosition().getY() - renderOffset.getY());
+    }
+
+    public int getRenderOrder() {
+        return renderOrder;
+    }
+
+    protected void clearParent() {
+        parent = null;
+    }
+
+    protected Position getRenderOffset() {
+        return renderOffset;
+    }
+
+    public void setRenderOrder(int renderOrder) {
+        this.renderOrder = renderOrder;
+    }
 }

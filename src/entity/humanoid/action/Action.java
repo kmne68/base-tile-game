@@ -3,20 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package entity.humanoid.action;
 
-import entity.MovingEntity;
 import entity.humanoid.Humanoid;
 import game.state.State;
 
-/**
- *
- * @author kmne6
- */
 public abstract class Action {
-  
-  public abstract void update(State state, Humanoid humanoid);
-  public abstract boolean isDone();
-  public abstract String getAnimationName();
-  
+
+    protected boolean interruptable;
+
+    public Action() {
+        interruptable = true;
+    }
+
+    public abstract void update(State state, Humanoid humanoid);
+    public abstract boolean isDone();
+    public abstract String getAnimationName();
+
+    public boolean isInterruptable() {
+        return interruptable;
+    }
 }

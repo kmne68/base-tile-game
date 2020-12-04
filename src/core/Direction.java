@@ -41,26 +41,25 @@ public enum Direction {
     
     double x = motion.getVector().getX();
     double y = motion.getVector().getY();
-    Direction direction = null;
     
     if(x == 0 && y > 0)
-      direction = South;
+      return South;
     if(x < 0 && y > 0)
-      direction = Southwest;
+      return Southwest;
     if(x < 0 && y == 0)
-      direction = West;
+      return West;
     if(x < 0 && y < 0)
-      direction = Northwest;
+      return Northwest;
     if(x == 0 && y < 0)
-      direction = North;
+      return North;
     if(x > 0 && y < 0)
-      direction = Northeast;
+      return Northeast;
     if(x > 0 && y == 0)
-      direction = East;
+      return East;
     if(x > 0 && y > 0)
-      direction = Southeast;
+      return Southeast;
     
-    return direction;
+    return South;
     
   }
   
