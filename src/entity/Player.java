@@ -5,6 +5,7 @@
  */
 package entity;
 
+import entity.humanoid.effect.Untargetable;
 import entity.humanoid.effect.Caffeinated;
 import gfx.SpriteLibrary;
 import controller.EntityController;
@@ -62,7 +63,7 @@ public class Player extends Humanoid {
       NPC npc = closestNPC.get();
       
       if(!npc.equals(target)) {
-        selectionCircle.setParent(npc);
+        selectionCircle.parent(npc);
         target = npc;
       }
     } else {

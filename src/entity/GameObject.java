@@ -71,11 +71,14 @@ public abstract class GameObject {
     this.size = size;
   }
 
-  public void setParent(GameObject parent) {
+  
+  // this is the verb 'parent'
+  public void parent(GameObject parent) {
     this.position = new Position(0, 0);
     this.parent = parent;
   }
 
+  
   public Position getRenderPosition(Camera camera) {
     
     return new Position(

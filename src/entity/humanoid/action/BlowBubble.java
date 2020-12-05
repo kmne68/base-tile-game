@@ -7,7 +7,7 @@ package entity.humanoid.action;
 
 import controller.NPCController;
 import entity.Bubble;
-import entity.Untargetable;
+import entity.humanoid.effect.Untargetable;
 import entity.humanoid.Humanoid;
 import game.GameLoop;
 import game.state.State;
@@ -26,8 +26,6 @@ public class BlowBubble extends Action {
   
   public BlowBubble(Humanoid target) {
     
-    System.out.println("BlowBubble constructor");
-    
     lifeSpanInUpdates = GameLoop.UPDATES_PER_SECOND;
     this.target = target;
     interruptable = false;
@@ -39,8 +37,6 @@ public class BlowBubble extends Action {
     target.perform(new Levitate());
     target.addEffect(new Untargetable());
     
-    System.out.println("BlowBubble bubbleTarget()");
-    
     bubble = new Bubble(new NPCController(), state.getSpriteLibrary());
     bubble.insert(target);
     
@@ -49,9 +45,7 @@ public class BlowBubble extends Action {
  
 
   @Override
-  public void update(State state, Humanoid humanoid) {    
-    
-    System.out.println("BlowBubble update()");
+  public void update(State state, Humanoid humanoid) {
     
     lifeSpanInUpdates--;
     
@@ -69,17 +63,11 @@ public class BlowBubble extends Action {
   @Override
   public boolean isDone() {
     
-    
-    System.out.println("BlowBubble isDone()");
-    
     return lifeSpanInUpdates == 0;
   }
 
   @Override
   public String getAnimationName() {
-    
-    
-    System.out.println("BlowBubble getAnimationName()");
     
     return "blow";
   }
