@@ -111,4 +111,9 @@ public class Humanoid extends MovingEntity {
             .anyMatch(effect -> aClass.isInstance(effect));
   }
 
+  public List<Effect> getEffects() {
+    
+    return effects;    
+  }
+
 }
