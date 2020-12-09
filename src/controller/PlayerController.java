@@ -27,35 +27,35 @@ public class PlayerController implements EntityController {
   @Override
   public boolean isRequestingUp() {
     
-    return input.isCurrentlyPressed(KeyEvent.VK_UP);
+    return input.isKeyCurrentlyPressed(KeyEvent.VK_UP);
     
   }
 
   @Override
   public boolean isRequestingDown() {
     
-    return input.isCurrentlyPressed(KeyEvent.VK_DOWN);
+    return input.isKeyCurrentlyPressed(KeyEvent.VK_DOWN);
     
   }
 
   @Override
   public boolean isRequestingLeft() {
     
-    return input.isCurrentlyPressed(KeyEvent.VK_LEFT);
+    return input.isKeyCurrentlyPressed(KeyEvent.VK_LEFT);
     
   }
 
   @Override
   public boolean isRequestingRight() {
     
-    return input.isCurrentlyPressed(KeyEvent.VK_RIGHT);
+    return input.isKeyCurrentlyPressed(KeyEvent.VK_RIGHT);
     
   }
 
   @Override
   public boolean isRequestingAction() {
     
-    return input.isPressed(KeyEvent.VK_SPACE);
+    return input.isKeyPressed(KeyEvent.VK_SPACE);
     
   }
   

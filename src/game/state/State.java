@@ -55,6 +55,7 @@ public abstract class State {
     updateGameObjects();
     uiContainers.forEach(uiContainer -> uiContainer.update(this));
     camera.update(this);
+    handleMouseInput();
   }
   
   
@@ -138,5 +139,13 @@ public abstract class State {
     for(int i = 0; i < gameObjects.size(); i++) {
       gameObjects.get(i).update(this);      
     }
+  }
+
+  private void handleMouseInput() {
+    
+    if(input.isMouseClicked()) {
+      System.out.println(String.format("Mouse clicked at x: %d, y: %d", input.getCursorPosition().intX(), input.getCursorPosition().intY() ) );
+    }
+    input.clearMouseClick();
   }
 }

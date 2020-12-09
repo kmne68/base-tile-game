@@ -26,15 +26,15 @@ public class GameController {
   
   public void update(Game game) {
     
-    if(input.isPressed(KeyEvent.VK_F2)) {
+    if(input.isKeyPressed(KeyEvent.VK_F2)) {
       game.getSettings().toggleDebugMode();
     }
     
-    if(input.isPressed(KeyEvent.VK_Y) ) {
+    if(input.isKeyPressed(KeyEvent.VK_Y) ) {
       game.getSettings().increaseGameSpeed();
     }
     
-    if(input.isPressed(KeyEvent.VK_H) ) {
+    if(input.isKeyPressed(KeyEvent.VK_H) ) {
       game.getSettings().decreaseGameSpeed();
     }
     
