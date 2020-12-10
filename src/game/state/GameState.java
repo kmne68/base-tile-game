@@ -17,11 +17,13 @@ import entity.humanoid.effect.Sick;
 import game.ui.UIGameTime;
 import game.ui.UISicknessStatistics;
 import input.Input;
+import java.awt.Color;
 import java.util.List;
 import map.GameMap;
 import ui.Alignment;
 import ui.UIText;
 import ui.VerticalContainer;
+import ui.clickable.UIButton;
 
 /**
  *
@@ -57,7 +59,7 @@ public class GameState extends State {
     gameObjects.add(circle);
 
     initializeNPCs(10);
-    makeNumberOfNPCsSick(1);
+    makeNumberOfNPCsSick(0);
   }
 
   private void initializeNPCs(int numberOfNPCs) {
@@ -160,7 +162,10 @@ public class GameState extends State {
 
     VerticalContainer winContainer = new VerticalContainer(camera.getWindowSize());
     winContainer.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.CENTER));
-    winContainer.addUIComponent(new UIText("VICTORY!"));
+    winContainer.setBackgroundColor(Color.DARK_GRAY);
+    winContainer.addUIComponent(new UIButton("MENU", () -> System.out.println("MENU button pressed!") ) );
+    winContainer.addUIComponent(new UIButton("OPTIONS", () -> System.out.println("OPTIONS button pressed!") ) );
+    winContainer.addUIComponent(new UIButton("EXIT", () -> System.exit(0) ) );
     uiContainers.add(winContainer);
   }
 

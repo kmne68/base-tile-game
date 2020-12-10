@@ -8,9 +8,7 @@ package game.state;
 import core.Position;
 import core.Size;
 import display.Camera;
-import entity.Bubble;
 import entity.GameObject;
-import entity.MovingEntity;
 import game.Time;
 import gfx.SpriteLibrary;
 import input.Input;
@@ -147,5 +145,10 @@ public abstract class State {
       System.out.println(String.format("Mouse clicked at x: %d, y: %d", input.getCursorPosition().intX(), input.getCursorPosition().intY() ) );
     }
     input.clearMouseClick();
+  }
+
+  public Input getInput() {
+    
+    return input;
   }
 }
