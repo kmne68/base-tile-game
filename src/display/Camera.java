@@ -9,7 +9,7 @@ import core.Position;
 import core.Size;
 import entity.GameObject;
 import game.Game;
-import game.state.State;
+import state.State;
 import java.awt.Rectangle;
 import java.util.Optional;
 
@@ -33,6 +33,7 @@ public class Camera {
     
     this.position = new Position(0, 0);
     this.windowSize = windowSize;
+    this.objectWithFocus = Optional.empty();
     calculateViewBounds();
   }
   

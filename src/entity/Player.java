@@ -13,7 +13,7 @@ import core.Position;
 import entity.humanoid.Humanoid;
 import entity.humanoid.action.BlowBubble;
 import game.Game;
-import game.state.State;
+import state.State;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Stream;

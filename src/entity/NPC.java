@@ -9,7 +9,7 @@ import ai.AIManager;
 import entity.humanoid.action.Action;
 import entity.humanoid.action.Cough;
 import entity.humanoid.effect.Sick;
-import game.state.State;
+import state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import java.util.Optional;

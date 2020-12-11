@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.state;
+package state.game;
 
 import controller.NPCController;
 import controller.PlayerController;
@@ -14,12 +14,15 @@ import entity.Player;
 import entity.SelectionCircle;
 import entity.humanoid.effect.Isolated;
 import entity.humanoid.effect.Sick;
-import game.ui.UIGameTime;
-import game.ui.UISicknessStatistics;
+import game.Game;
+import state.game.ui.UIGameTime;
+import state.game.ui.UISicknessStatistics;
 import input.Input;
 import java.awt.Color;
 import java.util.List;
 import map.GameMap;
+import state.State;
+import state.menu.MenuState;
 import ui.Alignment;
 import ui.UIText;
 import ui.VerticalContainer;
@@ -142,8 +145,8 @@ public class GameState extends State {
   }
 
   @Override
-  public void update() {
-    super.update();
+  public void update(Game game) {
+    super.update(game);
 
     if (playing) {
       if (victoryConditions.stream().allMatch(Condition::isMet)) {
@@ -163,9 +166,9 @@ public class GameState extends State {
     VerticalContainer winContainer = new VerticalContainer(camera.getWindowSize());
     winContainer.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.CENTER));
     winContainer.setBackgroundColor(Color.DARK_GRAY);
-    winContainer.addUIComponent(new UIButton("MENU", () -> System.out.println("MENU button pressed!") ) );
-    winContainer.addUIComponent(new UIButton("OPTIONS", () -> System.out.println("OPTIONS button pressed!") ) );
-    winContainer.addUIComponent(new UIButton("EXIT", () -> System.exit(0) ) );
+    winContainer.addUIComponent(new UIButton("MENU", (state) -> state.setNextState(new MenuState(windowSize, input)) ) );
+    winContainer.addUIComponent(new UIButton("OPTIONS", (state) -> System.out.println("OPTIONS button pressed!") ) );
+    winContainer.addUIComponent(new UIButton("EXIT", (state) -> System.exit(0) ) );
     uiContainers.add(winContainer);
   }
 

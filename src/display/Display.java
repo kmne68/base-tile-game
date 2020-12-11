@@ -5,7 +5,7 @@
  */
 package display;
 
-import game.state.State;
+import state.State;
 import input.Input;
 import java.awt.*;
 import java.awt.image.BufferStrategy;

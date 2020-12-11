@@ -10,7 +10,7 @@ import entity.Bubble;
 import entity.humanoid.effect.Isolated;
 import entity.humanoid.Humanoid;
 import game.GameLoop;
-import game.state.State;
+import state.State;
 
 /**
  *

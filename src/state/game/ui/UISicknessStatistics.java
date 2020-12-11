@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.ui;
+package state.game.ui;
 
 import core.Size;
-import game.state.GameState;
-import game.state.State;
+import state.game.GameState;
+import state.State;
 import ui.HorizontalContainer;
 import ui.Spacing;
 import ui.UIContainer;

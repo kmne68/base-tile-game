@@ -12,7 +12,7 @@ import core.Position;
 import core.Size;
 import core.Vector2D;
 import entity.humanoid.effect.Sick;
-import game.state.State;
+import state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import java.awt.Image;

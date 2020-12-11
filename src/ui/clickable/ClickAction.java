@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ai;
+package ui.clickable;
 
-import entity.NPC;
 import state.State;
 
 /**
  *
  * @author kmne6
  */
-public interface AICondition {
+public interface ClickAction {
   
-  boolean isMet(State state, NPC currentCharacter);
-  
+  void execute(State state); 
 }

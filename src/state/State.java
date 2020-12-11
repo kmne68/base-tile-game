@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.state;
+package state;
 
 import core.Position;
 import core.Size;
 import display.Camera;
 import entity.GameObject;
+import game.Game;
 import game.Time;
 import gfx.SpriteLibrary;
 import input.Input;
@@ -32,10 +33,13 @@ public abstract class State {
   protected Input input;
   protected Camera camera;
   private Time time;
+  private State nextState;
+  protected Size windowSize;
   
   
   public State(Size windowSize, Input input) {
     
+    this.windowSize = windowSize;
     this.input = input;
   
     gameObjects = new ArrayList<>();
@@ -47,13 +51,17 @@ public abstract class State {
   }
   
   
-  public void update() {    
+  public void update(Game game) { 
     time.update();
     sortObjectsByPosition();
     updateGameObjects();
-    uiContainers.forEach(uiContainer -> uiContainer.update(this));
+    List.copyOf(uiContainers).forEach(uiContainer -> uiContainer.update(this));
     camera.update(this);
     handleMouseInput();
+    
+    if(nextState != null) {
+      game.enterState(nextState);
+    }
   }
   
   
@@ -151,4 +159,10 @@ public abstract class State {
     
     return input;
   }
+
+  public void setNextState(State nextState) {
+    this.nextState = nextState;
+  }
+  
+  
 }

@@ -6,7 +6,7 @@
 package entity.humanoid.effect;
 
 import entity.humanoid.Humanoid;
-import game.state.State;
+import state.State;
 
 /**
  *

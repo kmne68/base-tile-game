@@ -6,7 +6,7 @@
 package ui;
 
 import core.Size;
-import game.state.State;
+import state.State;
 import gfx.ImageUtils;
 import java.awt.Canvas;
 import java.awt.Color;

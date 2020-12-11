@@ -7,19 +7,12 @@ package game;
 
 import controller.GameController;
 import display.Display;
-import entity.GameObject;
-import entity.Player;
-import controller.PlayerController;
 import core.Size;
 import game.settings.GameSettings;
-import game.state.GameState;
-import game.state.State;
-import gfx.SpriteLibrary;
+import state.game.GameState;
+import state.State;
 import input.Input;
-//import java.awt.*;
-//import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
+import state.menu.MenuState;
 
 /**
  *
@@ -39,7 +32,7 @@ public class Game {
     
     input = new Input();
     display = new Display(width, height, input);
-    state = new GameState(new Size(width, height), input);
+    state = new MenuState(new Size(width, height), input);
     settings = new GameSettings(false);
     gameController = new GameController(input);
   }
@@ -47,7 +40,7 @@ public class Game {
   
   public void update() {
     
-    state.update();
+    state.update(this);
     gameController.update(this);
   }
   
@@ -60,6 +53,11 @@ public class Game {
   
   public GameSettings getSettings() {
     return settings;
+  }
+
+  public void enterState(State nextState) {
+    
+    state = nextState;
   }
   
   

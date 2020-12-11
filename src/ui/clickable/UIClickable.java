@@ -6,7 +6,7 @@
 package ui.clickable;
 
 import core.Position;
-import game.state.State;
+import state.State;
 import java.awt.Rectangle;
 import ui.UIComponent;
 
@@ -30,12 +30,12 @@ public abstract class UIClickable extends UIComponent {
     isPressed = hasFocus && state.getInput().isMousePressed();
     
     if(hasFocus && state.getInput().isMouseClicked() ) {
-      onClick();
+      onClick(state);
     }
   }
   
   
-  protected abstract void onClick();
+  protected abstract void onClick(State state);
   
   
   private Rectangle getBounds() {
