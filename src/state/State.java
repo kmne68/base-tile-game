@@ -5,6 +5,7 @@
  */
 package state;
 
+import audio.AudioPlayer;
 import core.Position;
 import core.Size;
 import display.Camera;
@@ -26,6 +27,7 @@ import ui.UIContainer;
  */
 public abstract class State {  
   
+  protected AudioPlayer audioPlayer;
   protected GameMap gameMap;
   protected List<GameObject> gameObjects;
   protected List<UIContainer> uiContainers;
@@ -42,6 +44,7 @@ public abstract class State {
     this.windowSize = windowSize;
     this.input = input;
   
+    audioPlayer = new AudioPlayer();
     gameObjects = new ArrayList<>();
     uiContainers = new ArrayList<>();
     spriteLibrary = new SpriteLibrary();
