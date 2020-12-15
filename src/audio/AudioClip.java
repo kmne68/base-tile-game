@@ -5,6 +5,7 @@
  */
 package audio;
 
+import game.settings.AudioSettings;
 import game.settings.GameSettings;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
@@ -39,13 +40,26 @@ public abstract class AudioClip {
   }
   
   
-  public void update(GameSettings gameSettings) {
+  public void update(AudioSettings audioSettings) {
+    
+    setVolume(audioSettings);
+  }
+  
+
+  /***
+   * This method converts gain to volume (our wave file does not work with Type.VOLUME)
+   * allowing more standard values for volume control to be used   * 
+   */
+  protected void setVolume(AudioSettings audioSettings) {
     
     final FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-    control.setValue(getVolume(gameSettings));
+    float range = control.getMaximum() - control.getMinimum();
+    float gain = (range * getVolume(audioSettings)) + control.getMinimum();
+    
+    control.setValue(gain);
   }
   
   
-  protected abstract float getVolume(GameSettings gameSettings);
+  protected abstract float getVolume(AudioSettings audioSettings);
   
 }

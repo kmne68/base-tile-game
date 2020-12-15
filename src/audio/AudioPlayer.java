@@ -5,13 +5,11 @@
  */
 package audio;
 
-import game.settings.GameSettings;
+import game.settings.AudioSettings;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -24,12 +22,13 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class AudioPlayer {
   
-  
+  private AudioSettings audioSettings;
   List<AudioClip> audioClips;
   
   
-  public AudioPlayer() {
+  public AudioPlayer(AudioSettings audioSettings) {
     
+    this.audioSettings = audioSettings;
     audioClips = new ArrayList<>();
 
   }
@@ -38,6 +37,9 @@ public class AudioPlayer {
   public void playMusic(String fileName) {
     
     final Clip clip = getClip(fileName);
+    final MusicClip musicClip = new MusicClip(clip);
+    musicClip.setVolume(audioSettings);
+    
     audioClips.add(new MusicClip(clip));
   }
   
@@ -45,7 +47,10 @@ public class AudioPlayer {
   public void playSound(String fileName) {
     
     final Clip clip = getClip(fileName);
-    audioClips.add(new SoundClip(clip));
+    final SoundClip soundClip = new SoundClip(clip);
+    soundClip.setVolume(audioSettings);
+    
+    audioClips.add(soundClip);
   }
   
   
@@ -69,9 +74,9 @@ public class AudioPlayer {
   }
   
   
-  public void update(GameSettings gameSettings) {
+  public void update() {
     
-    audioClips.forEach(audioClip -> audioClip.update(gameSettings));
+    audioClips.forEach(audioClip -> audioClip.update(audioSettings));
     
     List.copyOf(audioClips).forEach(audioClip -> {
       if(audioClip.hasFinishedPlaying()) {

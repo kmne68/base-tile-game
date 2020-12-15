@@ -25,15 +25,15 @@ public class Game {
   private Display display;
   private Input input;
   private State state;
-  private GameSettings settings;
+  private GameSettings gameSettings;
   private GameController gameController;
   
   public Game(int width, int height) {
     
     input = new Input();
     display = new Display(width, height, input);
-    state = new MenuState(new Size(width, height), input);
-    settings = new GameSettings(false);
+    gameSettings = new GameSettings(false);
+    state = new MenuState(new Size(width, height), input, gameSettings);
     gameController = new GameController(input);
   }
   
@@ -47,12 +47,12 @@ public class Game {
   
   public void render() {
     
-    display.render(state, settings.isDebugMode());
+    display.render(state, gameSettings.isDebugMode());
   }
 
   
   public GameSettings getSettings() {
-    return settings;
+    return gameSettings;
   }
 
   public void enterState(State nextState) {
