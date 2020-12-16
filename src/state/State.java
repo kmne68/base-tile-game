@@ -20,7 +20,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import map.GameMap;
-import state.game.GameState;
 import ui.UIContainer;
 
 /**
@@ -58,7 +57,9 @@ public abstract class State {
   }
   
   
-  public void update(Game game) { 
+  public void update(Game game) {
+    
+    audioPlayer.update();
     time.update();
     sortObjectsByPosition();
     updateGameObjects();
